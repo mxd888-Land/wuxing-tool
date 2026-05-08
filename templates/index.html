@@ -77,20 +77,27 @@ label {
   margin-bottom: 10px;
   font-weight: 600;
 }
-input[type="date"] {
-  width: 100%;
-  padding: 14px 16px;
+.date-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.date-row select {
+  flex: 1;
+  padding: 14px 8px;
   border: 1.5px solid #D4B8A8;
   border-radius: 10px;
   font-family: 'Noto Serif TC', serif;
-  font-size: 16px;
+  font-size: 15px;
   color: var(--text);
   background: var(--bg);
   outline: none;
   transition: border-color 0.2s;
-  margin-bottom: 24px;
+  text-align: center;
+  appearance: none;
+  cursor: pointer;
 }
-input[type="date"]:focus { border-color: var(--primary); }
+.date-row select:focus { border-color: var(--primary); }
 
 button {
   width: 100%;
@@ -146,7 +153,26 @@ button:active { background: #5C1220; transform: scale(0.98); }
 
     <form action="/calculate" method="POST">
       <label>出 生 日 期</label>
-      <input type="date" name="birthdate" required min="1920-01-01" max="2010-12-31">
+      <div class="date-row">
+        <select name="day" required>
+          <option value="">日</option>
+          {% for d in range(1, 32) %}
+          <option value="{{ d }}">{{ d }}日</option>
+          {% endfor %}
+        </select>
+        <select name="month" required>
+          <option value="">月</option>
+          {% for m in range(1, 13) %}
+          <option value="{{ m }}">{{ m }}月</option>
+          {% endfor %}
+        </select>
+        <select name="year" required>
+          <option value="">年</option>
+          {% for y in range(2010, 1919, -1) %}
+          <option value="{{ y }}">{{ y }}年</option>
+          {% endfor %}
+        </select>
+      </div>
       <button type="submit">開 始 測 算</button>
     </form>
 

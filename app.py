@@ -85,8 +85,11 @@ def index():
 @app.route('/calculate', methods=['POST'])
 def calculate():
     try:
-        date_str = request.form['birthdate']
-        birth = datetime.strptime(date_str, '%Y-%m-%d').date()
+        from datetime import date as DateType
+        year  = int(request.form['year'])
+        month = int(request.form['month'])
+        day   = int(request.form['day'])
+        birth = DateType(year, month, day)
         result = calculate_wuxing(birth.year, birth.month, birth.day)
         element_info = ELEMENT_DATA[result['element']]
 
