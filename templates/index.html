@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>五行能量測算｜美想道</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --primary: #7B1A2E;
+  --bg:      #F0E6D8;
+  --gold:    #C9A96E;
+  --text:    #3D2B1F;
+  --light:   #FDFAF6;
+  --muted:   #8B6055;
+}
+body {
+  font-family: 'Noto Serif TC', serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px 60px;
+}
+.header {
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  padding: 44px 0 24px;
+  border-bottom: 1px solid var(--gold);
+  margin-bottom: 36px;
+}
+.brand { font-size: 22px; color: var(--primary); letter-spacing: 6px; font-weight: 700; }
+.brand-sub { font-size: 11px; color: var(--gold); letter-spacing: 4px; margin-top: 5px; }
+
+.main { width: 100%; max-width: 480px; }
+
+h1 {
+  font-size: 26px;
+  color: var(--primary);
+  text-align: center;
+  letter-spacing: 5px;
+  margin-bottom: 10px;
+}
+.subtitle {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 2;
+  letter-spacing: 1px;
+  margin-bottom: 36px;
+}
+.card {
+  background: var(--light);
+  border-radius: 18px;
+  padding: 32px 24px 28px;
+  box-shadow: 0 4px 24px rgba(123,26,46,0.08);
+}
+.error {
+  background: #FDF0EE;
+  color: #A83222;
+  font-size: 13px;
+  text-align: center;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+label {
+  display: block;
+  font-size: 12px;
+  color: var(--primary);
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+input[type="date"] {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid #D4B8A8;
+  border-radius: 10px;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 16px;
+  color: var(--text);
+  background: var(--bg);
+  outline: none;
+  transition: border-color 0.2s;
+  margin-bottom: 24px;
+}
+input[type="date"]:focus { border-color: var(--primary); }
+
+button {
+  width: 100%;
+  padding: 16px;
+  background: var(--primary);
+  color: var(--light);
+  border: none;
+  border-radius: 10px;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 16px;
+  letter-spacing: 4px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+button:active { background: #5C1220; transform: scale(0.98); }
+
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 24px 0;
+}
+.hint {
+  font-size: 12px;
+  color: #A08070;
+  text-align: center;
+  letter-spacing: 1px;
+  line-height: 2;
+}
+.footer {
+  margin-top: 36px;
+  font-size: 11px;
+  color: #B09080;
+  text-align: center;
+  letter-spacing: 3px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="brand">美 想 道</div>
+  <div class="brand-sub">MEI XIANG DAO</div>
+</div>
+
+<div class="main">
+  <h1>五 行 能 量</h1>
+  <p class="subtitle">輸入你的出生日期<br>探索屬於你的天賦能量密碼</p>
+
+  <div class="card">
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form action="/calculate" method="POST">
+      <label>出 生 日 期</label>
+      <input type="date" name="birthdate" required min="1920-01-01" max="2010-12-31">
+      <button type="submit">開 始 測 算</button>
+    </form>
+
+    <div class="divider"></div>
+    <p class="hint">每個人生來帶著獨特的能量頻率<br>五行是你與生俱來的天賦密碼</p>
+  </div>
+</div>
+
+<div class="footer">向 內 觀 己 ・ 向 外 綻 放</div>
+
+</body>
+</html>
