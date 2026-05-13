@@ -6,7 +6,7 @@ from calculator import calculate_wuxing
 app = Flask(__name__)
 DATABASE = 'wuxing.db'
 
-GAMMA_LINK = 'https://gamma.app/docs/-ghpuv5419bk3hth'
+GAMMA_LINK = 'https://gamma.app/docs/-df8wl8nfu0ykcin?openExternalBrowser=1'
 
 ELEMENT_DATA = {
     '金': {
