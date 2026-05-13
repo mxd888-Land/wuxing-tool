@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>領取你的禮物｜美想道</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --primary: #7B1A2E;
+  --bg:      #F0E6D8;
+  --gold:    #C9A96E;
+  --text:    #3D2B1F;
+  --light:   #FDFAF6;
+  --muted:   #8B6055;
+}
+body {
+  font-family: 'Noto Serif TC', serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px 60px;
+}
+
+.header {
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  padding: 44px 0 24px;
+  border-bottom: 1px solid var(--gold);
+  margin-bottom: 36px;
+}
+.brand     { font-size: 22px; color: var(--primary); letter-spacing: 6px; font-weight: 700; }
+.brand-sub { font-size: 11px; color: var(--gold); letter-spacing: 4px; margin-top: 5px; }
+
+.main { width: 100%; max-width: 480px; }
+
+.gift-card {
+  background: var(--light);
+  border-radius: 20px;
+  padding: 40px 28px 36px;
+  text-align: center;
+  box-shadow: 0 6px 30px rgba(123,26,46,0.10);
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.gift-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(to right, var(--primary), var(--gold), var(--primary));
+}
+
+.gift-icon {
+  font-size: 52px;
+  margin-bottom: 18px;
+  display: block;
+}
+
+.gift-label {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 4px;
+  margin-bottom: 12px;
+}
+
+.gift-title {
+  font-size: 22px;
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+
+.gift-subtitle {
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  margin-bottom: 28px;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 24px 0;
+}
+
+.gift-desc {
+  font-size: 15px;
+  line-height: 2.0;
+  color: #4A3328;
+  letter-spacing: 0.5px;
+  text-align: left;
+  margin-bottom: 28px;
+}
+
+.download-btn {
+  display: block;
+  width: 100%;
+  padding: 18px 16px;
+  background: var(--primary);
+  color: var(--light);
+  text-decoration: none;
+  text-align: center;
+  border-radius: 12px;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 16px;
+  letter-spacing: 3px;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.1s;
+}
+.download-btn:active { background: #5C1220; transform: scale(0.98); }
+.download-sub {
+  font-size: 12px;
+  opacity: 0.75;
+  display: block;
+  margin-top: 5px;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+
+.hint {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  line-height: 1.9;
+  margin-top: 16px;
+}
+
+.back-link {
+  display: block;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  text-decoration: none;
+  letter-spacing: 2px;
+  padding: 10px;
+  margin-top: 8px;
+}
+
+.footer {
+  margin-top: 32px;
+  font-size: 11px;
+  color: #B09080;
+  text-align: center;
+  letter-spacing: 3px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="brand">美 想 道</div>
+  <div class="brand-sub">MEI XIANG DAO</div>
+</div>
+
+<div class="main">
+
+  <div class="gift-card">
+    <span class="gift-icon">🎁</span>
+    <div class="gift-label">專 屬 禮 物</div>
+    <div class="gift-title">五行穿搭速查表</div>
+    <div class="gift-subtitle">知道自己的五行，穿對屬於你的能量</div>
+
+    <div class="divider"></div>
+
+    <p class="gift-desc">
+      這份速查表，讓你一眼看懂自己的五行屬性對應哪些顏色、材質與風格，<br><br>
+      從今天起，每次打開衣櫃都能穿出最好的自己。
+    </p>
+
+    <a href="https://drive.google.com/uc?export=download&id=1rJawShyyMLxMwOHVM-di1T_amxV6R24r" class="download-btn">
+      立即下載
+      <span class="download-sub">點擊即可儲存 PDF</span>
+    </a>
+
+    <p class="hint">若無法下載，請長按按鈕選擇「在瀏覽器中開啟」</p>
+  </div>
+
+  <a href="/" class="back-link">← 回 到 五 行 測 算</a>
+
+</div>
+
+<div class="footer">向 內 觀 己 ・ 向 外 綻 放</div>
+
+</body>
+</html>

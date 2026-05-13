@@ -113,6 +113,11 @@ def calculate():
         return render_template('index.html', error='請輸入有效的出生日期')
 
 
+@app.route('/gift')
+def gift():
+    return render_template('gift.html')
+
+
 init_db()
 
 if __name__ == '__main__':
