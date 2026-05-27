@@ -193,8 +193,9 @@ def send_registration_email(name, phone, email, line_id):
             server.starttls()
             server.login(GMAIL_USER, gmail_pass)
             server.send_message(msg)
-    except Exception:
-        pass
+        print(f'[EMAIL] 報名通知已寄出：{name}')
+    except Exception as e:
+        print(f'[EMAIL] 寄信失敗：{e}')
 
 
 @app.route('/register')
