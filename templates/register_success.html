@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>報名成功｜美想道</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --primary: #7B1A2E;
+  --bg:      #F0E6D8;
+  --gold:    #C9A96E;
+  --text:    #3D2B1F;
+  --light:   #FDFAF6;
+  --muted:   #8B6055;
+}
+body {
+  font-family: 'Noto Serif TC', serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px 60px;
+}
+.header {
+  width: 100%; max-width: 480px;
+  text-align: center;
+  padding: 44px 0 24px;
+  border-bottom: 1px solid var(--gold);
+  margin-bottom: 36px;
+}
+.brand     { font-size: 22px; color: var(--primary); letter-spacing: 6px; font-weight: 700; }
+.brand-sub { font-size: 11px; color: var(--gold); letter-spacing: 4px; margin-top: 5px; }
+
+.main {
+  width: 100%; max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.success-circle {
+  width: 86px; height: 86px;
+  border-radius: 50%;
+  background: #EEF5EF;
+  border: 2px solid #3E6B45;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px auto 28px;
+  font-size: 30px;
+  color: #3E6B45;
+  letter-spacing: 0;
+}
+
+.success-title {
+  font-size: 24px;
+  color: var(--primary);
+  letter-spacing: 6px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.success-desc {
+  font-size: 14px;
+  color: #4A3328;
+  line-height: 2.4;
+  letter-spacing: 0.5px;
+  margin-bottom: 32px;
+}
+
+.card {
+  background: var(--light);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(123,26,46,0.06);
+  width: 100%;
+  margin-bottom: 24px;
+  text-align: left;
+}
+.card-label {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+.card-steps {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 2.5;
+  letter-spacing: 0.5px;
+}
+
+.back-btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background: var(--primary);
+  color: var(--light);
+  text-decoration: none;
+  text-align: center;
+  border-radius: 10px;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 14px;
+  letter-spacing: 3px;
+  transition: background 0.2s;
+}
+.back-btn:active { background: #5C1220; }
+
+.footer {
+  margin-top: 36px;
+  font-size: 11px;
+  color: #B09080;
+  text-align: center;
+  letter-spacing: 3px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="brand">美 想 道</div>
+  <div class="brand-sub">MEI XIANG DAO</div>
+</div>
+
+<div class="main">
+
+  <div class="success-circle">✓</div>
+
+  <div class="success-title">報名成功</div>
+  <p class="success-desc">
+    感謝您報名風格覺醒營<br>
+    我們將盡快與您確認報名細節<br>
+    請留意您的手機與 Email
+  </p>
+
+  <div class="card">
+    <div class="card-label">✦ 接下來的步驟</div>
+    <div class="card-steps">
+      1. 請留意您的手機與 Email<br>
+      2. 專人將在 1-2 個工作天內聯繫您<br>
+      3. 完成付款後即正式確認名額
+    </div>
+  </div>
+
+  <a href="/" class="back-btn">回到五行測算</a>
+
+</div>
+
+<div class="footer">向 內 觀 己 ・ 向 外 綻 放</div>
+
+</body>
+</html>

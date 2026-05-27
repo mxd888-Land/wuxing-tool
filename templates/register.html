@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>風格覺醒營・報名｜美想道</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --primary: #7B1A2E;
+  --bg:      #F0E6D8;
+  --gold:    #C9A96E;
+  --text:    #3D2B1F;
+  --light:   #FDFAF6;
+  --muted:   #8B6055;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Serif TC', serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px 60px;
+}
+
+.header {
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  padding: 44px 0 24px;
+  border-bottom: 1px solid var(--gold);
+  margin-bottom: 36px;
+}
+.brand     { font-size: 22px; color: var(--primary); letter-spacing: 6px; font-weight: 700; }
+.brand-sub { font-size: 11px; color: var(--gold); letter-spacing: 4px; margin-top: 5px; }
+
+.main { width: 100%; max-width: 480px; }
+
+/* ── Hero ── */
+.hero { text-align: center; margin-bottom: 32px; }
+.hero-badge {
+  display: inline-block;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  border: 1px solid var(--gold);
+  padding: 4px 16px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero-title {
+  font-size: 36px;
+  color: var(--primary);
+  letter-spacing: 8px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+.hero-tagline {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 5px;
+  margin-bottom: 18px;
+}
+.hero-sub {
+  font-size: 15px;
+  color: #4A3328;
+  letter-spacing: 1px;
+  line-height: 2;
+  margin-bottom: 26px;
+}
+.hero-btn {
+  display: inline-block;
+  padding: 13px 34px;
+  background: var(--primary);
+  color: var(--light);
+  text-decoration: none;
+  border-radius: 10px;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 14px;
+  letter-spacing: 3px;
+  transition: background 0.2s;
+}
+.hero-btn:active { background: #5C1220; }
+
+/* ── Pain point quote ── */
+.quote-card {
+  background: var(--primary);
+  border-radius: 16px;
+  padding: 26px 22px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.quote-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+.quote-text {
+  font-size: 18px;
+  color: var(--light);
+  letter-spacing: 1px;
+  line-height: 1.7;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.quote-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  line-height: 2;
+  letter-spacing: 0.5px;
+}
+
+/* ── Core message ── */
+.core-msg {
+  background: var(--light);
+  border-radius: 14px;
+  padding: 22px 20px;
+  box-shadow: 0 3px 16px rgba(123,26,46,0.07);
+  margin-bottom: 32px;
+  border-left: 3px solid var(--gold);
+}
+.core-msg p {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 2.2;
+  letter-spacing: 0.5px;
+}
+.core-msg strong { color: var(--primary); }
+
+/* ── Section label ── */
+.section-label {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* ── Gains ── */
+.gains { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+.gain-card {
+  background: var(--light);
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 2px 12px rgba(123,26,46,0.06);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.gain-icon { font-size: 15px; color: var(--gold); flex-shrink: 0; margin-top: 3px; }
+.gain-title { font-size: 14px; color: var(--primary); font-weight: 600; letter-spacing: 1px; margin-bottom: 3px; }
+.gain-desc  { font-size: 12px; color: var(--muted); line-height: 1.8; letter-spacing: 0.3px; }
+
+/* ── For you ── */
+.for-you { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+.for-card {
+  background: var(--light);
+  border-radius: 12px;
+  padding: 15px 18px;
+  box-shadow: 0 2px 12px rgba(123,26,46,0.06);
+}
+.for-title { font-size: 14px; color: var(--primary); font-weight: 600; letter-spacing: 1px; margin-bottom: 4px; }
+.for-desc  { font-size: 12px; color: var(--muted); line-height: 1.9; letter-spacing: 0.3px; }
+
+/* ── Specs ── */
+.specs-card {
+  background: var(--light);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 3px 16px rgba(123,26,46,0.07);
+  margin-bottom: 32px;
+}
+.specs-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid #EDE0D4;
+}
+.specs-row:last-child { border-bottom: none; }
+.spec-cell {
+  padding: 16px 18px;
+  border-right: 1px solid #EDE0D4;
+}
+.spec-cell:last-child { border-right: none; }
+.spec-label { font-size: 11px; color: var(--primary); letter-spacing: 2px; font-weight: 600; margin-bottom: 5px; }
+.spec-val   { font-size: 13px; color: var(--text); letter-spacing: 0.5px; line-height: 1.6; }
+
+/* ── Includes ── */
+.includes-card {
+  background: var(--light);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 3px 16px rgba(123,26,46,0.07);
+  margin-bottom: 32px;
+}
+.include-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 18px 20px;
+  border-bottom: 1px solid #EDE0D4;
+}
+.include-item.border-none { border-bottom: none; }
+.include-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+.include-title { font-size: 15px; color: var(--primary); font-weight: 600; letter-spacing: 1px; margin-bottom: 4px; }
+.include-desc  { font-size: 12px; color: var(--muted); line-height: 1.8; letter-spacing: 0.3px; }
+
+/* ── Gamma link ── */
+.gamma-link {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  text-decoration: none;
+  padding: 6px 0 4px;
+  margin-bottom: 28px;
+}
+.gamma-link span { border-bottom: 1px solid #C4A898; }
+
+/* ── Pricing ── */
+.pricing-card {
+  background: var(--primary);
+  border-radius: 18px;
+  padding: 30px 24px;
+  text-align: center;
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.pricing-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+.pricing-label { font-size: 11px; color: rgba(201,169,110,0.75); letter-spacing: 4px; margin-bottom: 18px; }
+.price-orig    { font-size: 14px; color: rgba(255,255,255,0.4); letter-spacing: 1px; text-decoration: line-through; margin-bottom: 6px; }
+.price-main    { font-size: 38px; color: var(--gold); font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; line-height: 1; }
+.price-unit    { font-size: 16px; }
+.price-save    { font-size: 12px; color: rgba(255,255,255,0.55); letter-spacing: 1px; margin-bottom: 16px; }
+.price-divider { height: 1px; background: rgba(201,169,110,0.25); margin: 16px 0; }
+.price-note    { font-size: 12px; color: rgba(255,255,255,0.5); letter-spacing: 2px; }
+
+/* ── Closing ── */
+.closing {
+  text-align: center;
+  margin-bottom: 28px;
+  padding: 0 8px;
+}
+.closing-main {
+  font-size: 20px;
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+.closing-sub {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  line-height: 2;
+}
+
+/* ── Form ── */
+.form-card {
+  background: var(--light);
+  border-radius: 18px;
+  padding: 32px 24px 28px;
+  box-shadow: 0 4px 24px rgba(123,26,46,0.08);
+}
+.form-title {
+  font-size: 17px;
+  color: var(--primary);
+  letter-spacing: 5px;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 26px;
+}
+.field { margin-bottom: 18px; }
+label {
+  display: block;
+  font-size: 12px;
+  color: var(--primary);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.optional { font-weight: 400; color: var(--muted); font-size: 11px; letter-spacing: 1px; }
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid #D4B8A8;
+  border-radius: 10px;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--bg);
+  outline: none;
+  transition: border-color 0.2s;
+}
+input:focus { border-color: var(--primary); }
+input::placeholder { color: #C4A898; font-size: 13px; }
+
+.submit-btn {
+  width: 100%;
+  padding: 17px;
+  background: var(--primary);
+  color: var(--light);
+  border: none;
+  border-radius: 10px;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 16px;
+  letter-spacing: 5px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s, transform 0.1s;
+}
+.submit-btn:active { background: #5C1220; transform: scale(0.98); }
+.form-note {
+  font-size: 12px;
+  color: #A08070;
+  text-align: center;
+  letter-spacing: 1px;
+  line-height: 2;
+  margin-top: 16px;
+}
+
+.error {
+  background: #FDF0EE;
+  color: #A83222;
+  font-size: 13px;
+  text-align: center;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 28px 0;
+}
+
+.footer {
+  margin-top: 36px;
+  font-size: 11px;
+  color: #B09080;
+  text-align: center;
+  letter-spacing: 3px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="brand">美 想 道</div>
+  <div class="brand-sub">MEI XIANG DAO</div>
+</div>
+
+<div class="main">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">旗 艦 完 整 課 程</div>
+    <h1 class="hero-title">風格覺醒營</h1>
+    <div class="hero-tagline">向 內 觀 己 ・ 向 外 綻 放</div>
+    <p class="hero-sub">當你穿對了自己<br>世界也會為你轉身</p>
+    <a href="#register-form" class="hero-btn">立即搶佔早鳥名額</a>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Pain point -->
+  <div class="quote-card">
+    <div class="quote-text">你明明已經升級了，<br>卻沒有人發現。</div>
+    <div class="quote-sub">
+      當外在無法反映內在的成長，你的蛻變就像一個沒有被打開的禮物。你知道自己已經不一樣了，但世界還在用舊的眼光看你。
+    </div>
+  </div>
+
+  <!-- Core message -->
+  <div class="core-msg">
+    <p>風格覺醒營，<strong>不是教你怎麼穿</strong>，<br>而是幫你找回那個<strong>你本來就是的樣子</strong>。</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- What you'll gain -->
+  <div class="section-label">六 週 之 後 ， 你 將 擁 有</div>
+  <div class="gains">
+    <div class="gain-card">
+      <div class="gain-icon">◆</div>
+      <div>
+        <div class="gain-title">清晰的風格方向</div>
+        <div class="gain-desc">清楚知道自己的天生能量與風格方向，不再迷失在選擇之中。</div>
+      </div>
+    </div>
+    <div class="gain-card">
+      <div class="gain-icon">◆</div>
+      <div>
+        <div class="gain-title">真正屬於你的清爽衣櫥</div>
+        <div class="gain-desc">一個清爽、精準、每件都能穿的衣櫥，告別「沒有衣服穿」的困境。</div>
+      </div>
+    </div>
+    <div class="gain-card">
+      <div class="gain-icon">◆</div>
+      <div>
+        <div class="gain-title">完整個人風格檔案</div>
+        <div class="gain-desc">一份屬於你的風格檔案，記錄你的能量、色彩與廓形，陪伴你一生。</div>
+      </div>
+    </div>
+    <div class="gain-card">
+      <div class="gain-icon">◆</div>
+      <div>
+        <div class="gain-title">打從心底的自信</div>
+        <div class="gain-desc">相信「我就是那個值得被看見的人」，從內而外散發真實的自我能量。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- For you if -->
+  <div class="section-label">這 個 課 適 合 你 ， 如 果 ⋯⋯</div>
+  <div class="for-you">
+    <div class="for-card">
+      <div class="for-title">衣櫃爆炸症候群</div>
+      <div class="for-desc">衣服很多，卻每天覺得沒有衣服穿，選擇困難讓你精疲力竭。</div>
+    </div>
+    <div class="for-card">
+      <div class="for-title">人生轉場期</div>
+      <div class="for-desc">正在創業、換工作、重新出發——你需要一個與新身份相符的外在形象。</div>
+    </div>
+    <div class="for-card">
+      <div class="for-title">知道想變成某種樣子</div>
+      <div class="for-desc">你有模糊的方向感，但不知道從哪裡開始，需要一個清晰的起點。</div>
+    </div>
+    <div class="for-card">
+      <div class="for-title">想活得更像自己</div>
+      <div class="for-desc">你要的不只是好看，而是讓每一天的穿著都成為真實自我的延伸。</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Course includes -->
+  <div class="section-label">課 程 包 含</div>
+  <div class="includes-card">
+    <div class="include-item">
+      <div class="include-dot"></div>
+      <div>
+        <div class="include-title">六週共十二堂直播課 + 一堂線下課程</div>
+        <div class="include-desc">每週兩堂・每堂約 60–90 分鐘・小班制陪伴・線下深度實踐</div>
+      </div>
+    </div>
+    <div class="include-item">
+      <div class="include-dot"></div>
+      <div>
+        <div class="include-title">潛意識冥想音檔</div>
+        <div class="include-desc">溫柔拆解深層限制信念，讓改變從內在開始發生</div>
+      </div>
+    </div>
+    <div class="include-item">
+      <div class="include-dot"></div>
+      <div>
+        <div class="include-title">五行風格工具包</div>
+        <div class="include-desc">專屬於你的五行色彩、廓形與穿搭實戰工具</div>
+      </div>
+    </div>
+    <div class="include-item">
+      <div class="include-dot"></div>
+      <div>
+        <div class="include-title">一整年社群陪伴</div>
+        <div class="include-desc">課程結束後持續陪伴，與同頻夥伴一起成長</div>
+      </div>
+    </div>
+    <div class="include-item border-none">
+      <div class="include-dot"></div>
+      <div>
+        <div class="include-title">每週專屬答疑</div>
+        <div class="include-desc">全程個人化解答，你的每個問題都被看見</div>
+      </div>
+    </div>
+  </div>
+
+  <a class="gamma-link" href="https://gamma.app/docs/-df8wl8nfu0ykcin?openExternalBrowser=1" target="_blank">
+    <span>查看完整課程介紹 →</span>
+  </a>
+
+  <!-- Pricing -->
+  <div id="register-form"></div>
+  <div class="section-label">早 鳥 優 惠</div>
+  <div class="pricing-card">
+    <div class="pricing-label">LIMITED OFFER</div>
+    <div class="price-orig">原價 NT$ 57,600</div>
+    <div class="price-main"><span class="price-unit">NT$ </span>29,800</div>
+    <div class="price-save">早鳥優惠・省下 NT$27,800</div>
+    <div class="price-divider"></div>
+    <div class="price-note">早鳥名額有限，額滿即止</div>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing">
+    <div class="closing-main">你已經等自己太久了。</div>
+    <div class="closing-sub">現在，是時候讓外表追上<br>那個已經蛻變的你。</div>
+  </div>
+
+  <!-- Form -->
+  <div class="form-card">
+    <div class="form-title">立 即 預 約 名 額</div>
+
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form action="/register/submit" method="POST">
+      <div class="field">
+        <label>姓 名</label>
+        <input type="text" name="name" placeholder="請輸入您的姓名" required>
+      </div>
+      <div class="field">
+        <label>手 機 號 碼</label>
+        <input type="tel" name="phone" placeholder="請輸入手機號碼" required>
+      </div>
+      <div class="field">
+        <label>E-mail</label>
+        <input type="email" name="email" placeholder="請輸入電子信箱" required>
+      </div>
+      <div class="field">
+        <label>LINE ID <span class="optional">（選填，方便加入課程社群）</span></label>
+        <input type="text" name="line_id" placeholder="請輸入 LINE ID">
+      </div>
+      <button type="submit" class="submit-btn">確 認 報 名</button>
+      <p class="form-note">
+        提交後將有專人與您聯繫<br>
+        確認報名細節與付款方式
+      </p>
+    </form>
+  </div>
+
+</div>
+
+<div class="footer">向 內 觀 己 ・ 向 外 綻 放</div>
+
+</body>
+</html>

@@ -1,10 +1,16 @@
+import os
+import smtplib
 import sqlite3
 from datetime import datetime
-from flask import Flask, render_template, request
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from flask import Flask, redirect, render_template, request
 from calculator import calculate_wuxing
 
 app = Flask(__name__)
 DATABASE = 'wuxing.db'
+GMAIL_USER = 'tangyuxi1002@gmail.com'
+GMAIL_RECIPIENT = 'mxd@mxdyes.com'
 
 GAMMA_LINK = 'https://gamma.app/docs/-df8wl8nfu0ykcin?openExternalBrowser=1'
 
@@ -109,6 +115,16 @@ def init_db():
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     ''')
+    conn.execute('''
+        CREATE TABLE IF NOT EXISTS registrations (
+            id         INTEGER PRIMARY KEY AUTOINCREMENT,
+            name       TEXT NOT NULL,
+            phone      TEXT NOT NULL,
+            email      TEXT NOT NULL,
+            line_id    TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
     conn.commit()
     conn.close()
 
@@ -152,6 +168,61 @@ def calculate():
 @app.route('/gift')
 def gift():
     return render_template('gift.html')
+
+
+def send_registration_email(name, phone, email, line_id):
+    gmail_pass = os.environ.get('GMAIL_APP_PASSWORD', '')
+    if not gmail_pass:
+        return
+    msg = MIMEMultipart()
+    msg['From'] = GMAIL_USER
+    msg['To'] = GMAIL_RECIPIENT
+    msg['Subject'] = f'【美想道】風格覺醒營新報名：{name}'
+    body = (
+        f"新報名通知\n\n"
+        f"姓名：{name}\n"
+        f"手機：{phone}\n"
+        f"Email：{email}\n"
+        f"LINE ID：{line_id or '未填寫'}\n\n"
+        f"報名時間：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+    )
+    msg.attach(MIMEText(body, 'plain', 'utf-8'))
+    try:
+        with smtplib.SMTP('smtp.gmail.com', 587) as server:
+            server.starttls()
+            server.login(GMAIL_USER, gmail_pass)
+            server.send_message(msg)
+    except Exception:
+        pass
+
+
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
+
+@app.route('/register/submit', methods=['POST'])
+def register_submit():
+    name    = request.form.get('name', '').strip()
+    phone   = request.form.get('phone', '').strip()
+    email   = request.form.get('email', '').strip()
+    line_id = request.form.get('line_id', '').strip()
+    if not name or not phone or not email:
+        return render_template('register.html', error='請填寫所有必填欄位')
+    conn = get_db()
+    conn.execute(
+        'INSERT INTO registrations (name, phone, email, line_id) VALUES (?, ?, ?, ?)',
+        (name, phone, email, line_id or None)
+    )
+    conn.commit()
+    conn.close()
+    send_registration_email(name, phone, email, line_id)
+    return redirect('/register/success')
+
+
+@app.route('/register/success')
+def register_success():
+    return render_template('register_success.html')
 
 
 init_db()
