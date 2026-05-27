@@ -1,6 +1,7 @@
 import os
 import smtplib
 import sqlite3
+import threading
 from datetime import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -188,7 +189,7 @@ def send_registration_email(name, phone, email, line_id):
     )
     msg.attach(MIMEText(body, 'plain', 'utf-8'))
     try:
-        with smtplib.SMTP('smtp.gmail.com', 587) as server:
+        with smtplib.SMTP('smtp.gmail.com', 587, timeout=15) as server:
             server.starttls()
             server.login(GMAIL_USER, gmail_pass)
             server.send_message(msg)
@@ -216,7 +217,11 @@ def register_submit():
     )
     conn.commit()
     conn.close()
-    send_registration_email(name, phone, email, line_id)
+    threading.Thread(
+        target=send_registration_email,
+        args=(name, phone, email, line_id),
+        daemon=True
+    ).start()
     return redirect('/register/success')
 
 
