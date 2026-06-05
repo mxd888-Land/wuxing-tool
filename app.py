@@ -1,3 +1,4 @@
+import json
 import os
 import smtplib
 import sqlite3
@@ -241,6 +242,30 @@ def gift():
     return render_template('gift.html')
 
 
+def append_to_sheet(name, phone, email, line_id):
+    """將報名資料寫入 Google 試算表（背景執行）"""
+    creds_json = os.environ.get('GOOGLE_CREDENTIALS_JSON', '')
+    sheet_id   = os.environ.get('GOOGLE_SHEET_ID', '')
+    if not creds_json or not sheet_id:
+        print('[SHEET] 未設定 GOOGLE_CREDENTIALS_JSON 或 GOOGLE_SHEET_ID，略過')
+        return
+    try:
+        import gspread
+        from google.oauth2.service_account import Credentials
+        creds = Credentials.from_service_account_info(
+            json.loads(creds_json),
+            scopes=['https://www.googleapis.com/auth/spreadsheets']
+        )
+        ws = gspread.authorize(creds).open_by_key(sheet_id).sheet1
+        ws.append_row([
+            datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            name, phone, email, line_id or '未填寫'
+        ])
+        print(f'[SHEET] 已寫入：{name}')
+    except Exception as e:
+        print(f'[SHEET] 寫入失敗：{e}')
+
+
 def send_registration_email(name, phone, email, line_id):
     gmail_pass = os.environ.get('GMAIL_APP_PASSWORD', '')
     if not gmail_pass:
@@ -290,6 +315,11 @@ def register_submit():
     conn.close()
     threading.Thread(
         target=send_registration_email,
+        args=(name, phone, email, line_id),
+        daemon=True
+    ).start()
+    threading.Thread(
+        target=append_to_sheet,
         args=(name, phone, email, line_id),
         daemon=True
     ).start()
