@@ -87,54 +87,6 @@ body {
 }
 .hero-btn:active { background: #5C1220; }
 
-/* ── Pain point quote ── */
-.quote-card {
-  background: var(--primary);
-  border-radius: 16px;
-  padding: 26px 22px;
-  margin-bottom: 20px;
-  position: relative;
-  overflow: hidden;
-}
-.quote-card::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(to right, transparent, var(--gold), transparent);
-}
-.quote-text {
-  font-size: 18px;
-  color: var(--light);
-  letter-spacing: 1px;
-  line-height: 1.7;
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-.quote-sub {
-  font-size: 13px;
-  color: rgba(255,255,255,0.65);
-  line-height: 2;
-  letter-spacing: 0.5px;
-}
-
-/* ── Core message ── */
-.core-msg {
-  background: var(--light);
-  border-radius: 14px;
-  padding: 22px 20px;
-  box-shadow: 0 3px 16px rgba(123,26,46,0.07);
-  margin-bottom: 32px;
-  border-left: 3px solid var(--gold);
-}
-.core-msg p {
-  font-size: 14px;
-  color: var(--text);
-  line-height: 2.2;
-  letter-spacing: 0.5px;
-}
-.core-msg strong { color: var(--primary); }
-
 /* ── Section label ── */
 .section-label {
   font-size: 11px;
@@ -143,94 +95,6 @@ body {
   text-align: center;
   margin-bottom: 16px;
 }
-
-/* ── Gains ── */
-.gains { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
-.gain-card {
-  background: var(--light);
-  border-radius: 12px;
-  padding: 16px 18px;
-  box-shadow: 0 2px 12px rgba(123,26,46,0.06);
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-.gain-icon { font-size: 15px; color: var(--gold); flex-shrink: 0; margin-top: 3px; }
-.gain-title { font-size: 14px; color: var(--primary); font-weight: 600; letter-spacing: 1px; margin-bottom: 3px; }
-.gain-desc  { font-size: 12px; color: var(--muted); line-height: 1.8; letter-spacing: 0.3px; }
-
-/* ── For you ── */
-.for-you { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
-.for-card {
-  background: var(--light);
-  border-radius: 12px;
-  padding: 15px 18px;
-  box-shadow: 0 2px 12px rgba(123,26,46,0.06);
-}
-.for-title { font-size: 14px; color: var(--primary); font-weight: 600; letter-spacing: 1px; margin-bottom: 4px; }
-.for-desc  { font-size: 12px; color: var(--muted); line-height: 1.9; letter-spacing: 0.3px; }
-
-/* ── Specs ── */
-.specs-card {
-  background: var(--light);
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 3px 16px rgba(123,26,46,0.07);
-  margin-bottom: 32px;
-}
-.specs-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border-bottom: 1px solid #EDE0D4;
-}
-.specs-row:last-child { border-bottom: none; }
-.spec-cell {
-  padding: 16px 18px;
-  border-right: 1px solid #EDE0D4;
-}
-.spec-cell:last-child { border-right: none; }
-.spec-label { font-size: 11px; color: var(--primary); letter-spacing: 2px; font-weight: 600; margin-bottom: 5px; }
-.spec-val   { font-size: 13px; color: var(--text); letter-spacing: 0.5px; line-height: 1.6; }
-
-/* ── Includes ── */
-.includes-card {
-  background: var(--light);
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 3px 16px rgba(123,26,46,0.07);
-  margin-bottom: 32px;
-}
-.include-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 18px 20px;
-  border-bottom: 1px solid #EDE0D4;
-}
-.include-item.border-none { border-bottom: none; }
-.include-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--gold);
-  flex-shrink: 0;
-  margin-top: 6px;
-}
-.include-title { font-size: 15px; color: var(--primary); font-weight: 600; letter-spacing: 1px; margin-bottom: 4px; }
-.include-desc  { font-size: 12px; color: var(--muted); line-height: 1.8; letter-spacing: 0.3px; }
-
-/* ── Gamma link ── */
-.gamma-link {
-  display: block;
-  text-align: center;
-  font-size: 12px;
-  color: var(--muted);
-  letter-spacing: 1px;
-  text-decoration: none;
-  padding: 6px 0 4px;
-  margin-bottom: 28px;
-}
-.gamma-link span { border-bottom: 1px solid #C4A898; }
 
 /* ── Pricing ── */
 .pricing-card {
@@ -389,123 +253,6 @@ input::placeholder { color: #C4A898; font-size: 13px; }
 
   <div class="divider"></div>
 
-  <!-- Pain point -->
-  <div class="quote-card">
-    <div class="quote-text">你明明已經升級了，<br>卻沒有人發現。</div>
-    <div class="quote-sub">
-      當外在無法反映內在的成長，你的蛻變就像一個沒有被打開的禮物。你知道自己已經不一樣了，但世界還在用舊的眼光看你。
-    </div>
-  </div>
-
-  <!-- Core message -->
-  <div class="core-msg">
-    <p>風格覺醒營，<strong>不是教你怎麼穿</strong>，<br>而是幫你找回那個<strong>你本來就是的樣子</strong>。</p>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- What you'll gain -->
-  <div class="section-label">六 週 之 後 ， 你 將 擁 有</div>
-  <div class="gains">
-    <div class="gain-card">
-      <div class="gain-icon">◆</div>
-      <div>
-        <div class="gain-title">清晰的風格方向</div>
-        <div class="gain-desc">清楚知道自己的天生能量與風格方向，不再迷失在選擇之中。</div>
-      </div>
-    </div>
-    <div class="gain-card">
-      <div class="gain-icon">◆</div>
-      <div>
-        <div class="gain-title">真正屬於你的清爽衣櫥</div>
-        <div class="gain-desc">一個清爽、精準、每件都能穿的衣櫥，告別「沒有衣服穿」的困境。</div>
-      </div>
-    </div>
-    <div class="gain-card">
-      <div class="gain-icon">◆</div>
-      <div>
-        <div class="gain-title">完整個人風格檔案</div>
-        <div class="gain-desc">一份屬於你的風格檔案，記錄你的能量、色彩與廓形，陪伴你一生。</div>
-      </div>
-    </div>
-    <div class="gain-card">
-      <div class="gain-icon">◆</div>
-      <div>
-        <div class="gain-title">打從心底的自信</div>
-        <div class="gain-desc">相信「我就是那個值得被看見的人」，從內而外散發真實的自我能量。</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- For you if -->
-  <div class="section-label">這 個 課 適 合 你 ， 如 果 ⋯⋯</div>
-  <div class="for-you">
-    <div class="for-card">
-      <div class="for-title">衣櫃爆炸症候群</div>
-      <div class="for-desc">衣服很多，卻每天覺得沒有衣服穿，選擇困難讓你精疲力竭。</div>
-    </div>
-    <div class="for-card">
-      <div class="for-title">人生轉場期</div>
-      <div class="for-desc">正在創業、換工作、重新出發——你需要一個與新身份相符的外在形象。</div>
-    </div>
-    <div class="for-card">
-      <div class="for-title">知道想變成某種樣子</div>
-      <div class="for-desc">你有模糊的方向感，但不知道從哪裡開始，需要一個清晰的起點。</div>
-    </div>
-    <div class="for-card">
-      <div class="for-title">想活得更像自己</div>
-      <div class="for-desc">你要的不只是好看，而是讓每一天的穿著都成為真實自我的延伸。</div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <!-- Course includes -->
-  <div class="section-label">課 程 包 含</div>
-  <div class="includes-card">
-    <div class="include-item">
-      <div class="include-dot"></div>
-      <div>
-        <div class="include-title">六週共十二堂直播課 + 一堂線下課程</div>
-        <div class="include-desc">每週兩堂・每堂約 60–90 分鐘・小班制陪伴・線下深度實踐</div>
-      </div>
-    </div>
-    <div class="include-item">
-      <div class="include-dot"></div>
-      <div>
-        <div class="include-title">潛意識冥想音檔</div>
-        <div class="include-desc">溫柔拆解深層限制信念，讓改變從內在開始發生</div>
-      </div>
-    </div>
-    <div class="include-item">
-      <div class="include-dot"></div>
-      <div>
-        <div class="include-title">五行風格工具包</div>
-        <div class="include-desc">專屬於你的五行色彩、廓形與穿搭實戰工具</div>
-      </div>
-    </div>
-    <div class="include-item">
-      <div class="include-dot"></div>
-      <div>
-        <div class="include-title">一整年社群陪伴</div>
-        <div class="include-desc">課程結束後持續陪伴，與同頻夥伴一起成長</div>
-      </div>
-    </div>
-    <div class="include-item border-none">
-      <div class="include-dot"></div>
-      <div>
-        <div class="include-title">每週專屬答疑</div>
-        <div class="include-desc">全程個人化解答，你的每個問題都被看見</div>
-      </div>
-    </div>
-  </div>
-
-  <a class="gamma-link" href="https://gamma.app/docs/-df8wl8nfu0ykcin?openExternalBrowser=1" target="_blank">
-    <span>查看完整課程介紹 →</span>
-  </a>
-
   <!-- Pricing -->
   <div id="register-form"></div>
   <div class="section-label">早 鳥 優 惠</div>
@@ -515,7 +262,8 @@ input::placeholder { color: #C4A898; font-size: 13px; }
     <div class="price-main"><span class="price-unit">NT$ </span>29,800</div>
     <div class="price-save">早鳥優惠・省下 NT$27,800</div>
     <div class="price-divider"></div>
-    <div class="price-note">早鳥名額有限，額滿即止</div>
+    <div class="price-note">預計 2026 年 8 月開課</div>
+    <div class="price-note" style="margin-top:6px;">早鳥名額有限，額滿即止</div>
   </div>
 
   <!-- Closing -->
