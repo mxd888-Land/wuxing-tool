@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>每日幸運色｜美想道</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #7B1A2E;
+      --gold:    #C9A96E;
+      --bg:      #F0E6D8;
+      --text:    #3D2B1F;
+      --light:   #FDFAF6;
+      --muted:   #8B6055;
+    }
+
+    body {
+      font-family: 'Noto Serif TC', serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 60px;
+    }
+
+    /* 品牌標題 */
+    .brand {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .brand-name {
+      font-size: 22px;
+      color: var(--primary);
+      letter-spacing: 8px;
+      font-weight: 600;
+    }
+    .brand-sub {
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 4px;
+      margin-top: 5px;
+    }
+
+    /* 分隔線 */
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 0 auto 32px;
+    }
+
+    /* 主卡片 */
+    .card {
+      background: var(--light);
+      border-radius: 16px;
+      padding: 36px 28px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 4px 24px rgba(123,26,46,0.08);
+      text-align: center;
+    }
+
+    .date-label {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 3px;
+      margin-bottom: 6px;
+    }
+
+    .date-value {
+      font-size: 18px;
+      color: var(--primary);
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin-bottom: 28px;
+    }
+
+    /* 流日數字 */
+    .number-wrap {
+      margin-bottom: 28px;
+    }
+    .number-label {
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 4px;
+      margin-bottom: 10px;
+    }
+    .number-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--light);
+      font-size: 32px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      letter-spacing: 0;
+      box-shadow: 0 4px 16px rgba(123,26,46,0.25);
+    }
+
+    /* 五行 */
+    .element-wrap {
+      margin-bottom: 32px;
+    }
+    .element-label {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+    }
+    .element-name {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 4px;
+    }
+    .element-en {
+      font-size: 12px;
+      letter-spacing: 3px;
+      margin-top: 4px;
+      opacity: 0.7;
+    }
+
+    /* 幸運色色塊 */
+    .colors-label {
+      font-size: 11px;
+      color: var(--gold);
+      letter-spacing: 4px;
+      margin-bottom: 16px;
+    }
+    .swatches {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .swatch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .swatch-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 2px solid rgba(0,0,0,0.06);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .swatch-name {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
+    /* 每日訊息 */
+    .message {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 2;
+      letter-spacing: 0.5px;
+      padding: 20px;
+      background: var(--bg);
+      border-radius: 10px;
+    }
+
+    /* 頁尾 */
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+    }
+    .footer-tagline {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 3px;
+    }
+    .footer-brand {
+      font-size: 13px;
+      color: var(--primary);
+      letter-spacing: 4px;
+      margin-top: 8px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="brand">
+    <div class="brand-name">美 想 道</div>
+    <div class="brand-sub">MXD STYLE</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card">
+
+    <div class="date-label">今 日 日 期</div>
+    <div class="date-value">{{ today }}</div>
+
+    <div class="number-wrap">
+      <div class="number-label">大 環 境 流 日</div>
+      <div class="number-circle">{{ number }}</div>
+    </div>
+
+    <div class="element-wrap">
+      <div class="element-label">今 日 五 行</div>
+      <div class="element-name" style="color: {{ info.color }};">{{ info.element }}</div>
+      <div class="element-en" style="color: {{ info.color }};">{{ info.english }}</div>
+    </div>
+
+    <div class="colors-label">今 日 穿 衣 幸 運 色</div>
+    <div class="swatches">
+      {% for hex, name in info.colors %}
+      <div class="swatch">
+        <div class="swatch-circle" style="background: {{ hex }};"></div>
+        <div class="swatch-name">{{ name }}</div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="message">{{ info.message }}</div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-tagline">向 內 觀 己 · 向 外 綻 放</div>
+    <div class="footer-brand">美 想 道</div>
+  </div>
+
+</body>
+</html>

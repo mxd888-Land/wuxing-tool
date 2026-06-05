@@ -166,6 +166,51 @@ def calculate():
         return render_template('index.html', error='請輸入有效的出生日期')
 
 
+@app.route('/daily')
+def daily():
+    from datetime import date
+    today = date.today()
+    digits = [int(d) for d in today.strftime('%Y%m%d')]
+    total = sum(digits)
+    while total >= 10:
+        total = sum(int(d) for d in str(total))
+    number = total
+
+    DAILY_DATA = {
+        1: {'element': '金', 'english': 'Metal', 'color': '#B8860B', 'bg': '#FDF8EE',
+            'colors': [('#FFFFFF','白色'), ('#C9A96E','金色'), ('#C0C0C0','銀色')],
+            'message': '今天穿上金屬光澤或純淨白，讓你的清醒與自信一眼可見。'},
+        2: {'element': '水', 'english': 'Water', 'color': '#2C6E8A', 'bg': '#EEF5F8',
+            'colors': [('#1A1A2E','深藍黑'), ('#2C6E8A','藏青藍'), ('#4A4A6A','靛紫灰')],
+            'message': '深邃的水色系，讓你的智慧與沉靜在今天最閃耀。'},
+        3: {'element': '火', 'english': 'Fire', 'color': '#A83222', 'bg': '#FDF0EE',
+            'colors': [('#A83222','酒紅'), ('#E8601C','橙紅'), ('#7B2D8B','深紫')],
+            'message': '今天用火的溫度點亮自己，大膽穿出你最有力量的顏色。'},
+        4: {'element': '木', 'english': 'Wood', 'color': '#3E6B45', 'bg': '#EEF5EF',
+            'colors': [('#3E6B45','森林綠'), ('#6BAF7A','嫩草綠'), ('#5B9E9E','青碧色')],
+            'message': '今天用自然的綠意提醒自己：紮根，才能向上生長。'},
+        5: {'element': '土', 'english': 'Earth', 'color': '#7A5C1E', 'bg': '#F8F3EA',
+            'colors': [('#C8A96E','暖駝色'), ('#7A5C1E','深棕'), ('#E8D5B0','米麥色')],
+            'message': '土的包容與穩定，今天讓大地色系成為你最安心的力量。'},
+        6: {'element': '金', 'english': 'Metal', 'color': '#B8860B', 'bg': '#FDF8EE',
+            'colors': [('#FFFFFF','白色'), ('#C9A96E','金色'), ('#C0C0C0','銀色')],
+            'message': '今天穿上金屬光澤或純淨白，讓你的清醒與自信一眼可見。'},
+        7: {'element': '水', 'english': 'Water', 'color': '#2C6E8A', 'bg': '#EEF5F8',
+            'colors': [('#1A1A2E','深藍黑'), ('#2C6E8A','藏青藍'), ('#4A4A6A','靛紫灰')],
+            'message': '深邃的水色系，讓你的智慧與沉靜在今天最閃耀。'},
+        8: {'element': '火', 'english': 'Fire', 'color': '#A83222', 'bg': '#FDF0EE',
+            'colors': [('#A83222','酒紅'), ('#E8601C','橙紅'), ('#7B2D8B','深紫')],
+            'message': '今天用火的溫度點亮自己，大膽穿出你最有力量的顏色。'},
+        9: {'element': '木', 'english': 'Wood', 'color': '#3E6B45', 'bg': '#EEF5EF',
+            'colors': [('#3E6B45','森林綠'), ('#6BAF7A','嫩草綠'), ('#5B9E9E','青碧色')],
+            'message': '今天用自然的綠意提醒自己：紮根，才能向上生長。'},
+    }
+
+    info = DAILY_DATA[number]
+    date_label = f"{today.year}年{today.month}月{today.day}日"
+    return render_template('daily.html', today=date_label, number=number, info=info)
+
+
 @app.route('/gift')
 def gift():
     return render_template('gift.html')
