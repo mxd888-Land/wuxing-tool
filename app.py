@@ -300,6 +300,58 @@ def register_success():
     return render_template('register_success.html')
 
 
+@app.route('/broadcast', methods=['GET', 'POST'])
+def broadcast_daily():
+    """每日幸運色推播，讓 cron-job.org 每天早上呼叫此路由"""
+    import requests as req
+    from datetime import date
+
+    CHANNEL_ID     = "2009971178"
+    CHANNEL_SECRET = "1e4043dd9bd72c6ffdd5f5555714152e"
+    GENERATES      = {'木':'火','火':'土','土':'金','金':'水','水':'木'}
+    GENERATED_BY   = {v:k for k,v in GENERATES.items()}
+    NUM_TO_ELEM    = {1:'金',2:'水',3:'火',4:'木',5:'土',6:'金',7:'水',8:'火',9:'木'}
+    ELEM_EMOJI     = {'金':'⚪','水':'🔵','火':'🔴','木':'🟢','土':'🟡'}
+
+    # 取 token
+    r = req.post(
+        "https://api.line.me/v2/oauth/accessToken",
+        headers={"Content-Type": "application/x-www-form-urlencoded"},
+        data=f"grant_type=client_credentials&client_id={CHANNEL_ID}&client_secret={CHANNEL_SECRET}"
+    )
+    token = r.json().get("access_token")
+    if not token:
+        return "token error", 500
+
+    # 計算流日
+    today = date.today()
+    total = sum(int(d) for d in today.strftime('%Y%m%d'))
+    while total >= 10:
+        total = sum(int(d) for d in str(total))
+    elem  = NUM_TO_ELEM[total]
+    noble = GENERATES[elem]
+    drain = GENERATED_BY[elem]
+
+    msg = (
+        f"✦ 美想道｜{today.month}月{today.day}日 每日幸運色\n\n"
+        f"大環境流日【{total}】· 今日五行：{ELEM_EMOJI[elem]} {elem}\n\n"
+        f"👑 貴人色：{noble}（輕鬆愉快，貴人加持）\n"
+        f"💼 合作色：{elem}（商務合作，互利共贏）\n"
+        f"⚠️ 消耗色：{drain}（今日不推薦）\n\n"
+        f"➜ 查看完整色卡\n"
+        f"https://wuxing-tool.onrender.com/daily?openExternalBrowser=1"
+    )
+
+    result = req.post(
+        "https://api.line.me/v2/bot/message/broadcast",
+        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json"},
+        json={"messages": [{"type": "text", "text": msg}]}
+    )
+    status = "ok" if result.status_code == 200 else result.text
+    print(f"[BROADCAST] {today} 推播：{status}")
+    return f"broadcast {status}", result.status_code
+
+
 init_db()
 
 if __name__ == '__main__':
