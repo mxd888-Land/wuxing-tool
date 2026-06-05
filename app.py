@@ -176,18 +176,35 @@ def daily():
         total = sum(int(d) for d in str(total))
     number = total
 
+    # 五行元素資料（顏色、文字色）
+    ELEMENTS = {
+        '金': {'english': 'Metal', 'color': '#B8860B', 'colors': [('#FFFFFF','白色'), ('#C9A96E','金色'), ('#C0C0C0','銀色')]},
+        '水': {'english': 'Water', 'color': '#2C6E8A', 'colors': [('#1A1A2E','深藍黑'), ('#2C6E8A','藏青藍'), ('#4A4A6A','靛紫灰')]},
+        '火': {'english': 'Fire',  'color': '#A83222', 'colors': [('#A83222','酒紅'), ('#E8601C','橙紅'), ('#7B2D8B','深紫')]},
+        '木': {'english': 'Wood',  'color': '#3E6B45', 'colors': [('#3E6B45','森林綠'), ('#6BAF7A','嫩草綠'), ('#5B9E9E','青碧色')]},
+        '土': {'english': 'Earth', 'color': '#7A5C1E', 'colors': [('#C8A96E','暖駝色'), ('#7A5C1E','深棕'), ('#E8D5B0','米麥色')]},
+    }
+
+    # 相生順序：木→火→土→金→水→木
+    GENERATES = {'木': '火', '火': '土', '土': '金', '金': '水', '水': '木'}
+    # 反推：誰生了我（消耗來源）
+    GENERATED_BY = {v: k for k, v in GENERATES.items()}
+
+    NUMBER_TO_ELEMENT = {1:'金', 2:'水', 3:'火', 4:'木', 5:'土',
+                         6:'金', 7:'水', 8:'火', 9:'木'}
+
+    daily_elem  = NUMBER_TO_ELEMENT[number]
+    noble_elem  = GENERATES[daily_elem]      # 我生的 → 貴人色
+    drain_elem  = GENERATED_BY[daily_elem]   # 生我的 → 消耗色
+
     DAILY_DATA = {
         1: {'element': '金', 'english': 'Metal', 'color': '#B8860B', 'bg': '#FDF8EE',
-            'colors': [('#FFFFFF','白色'), ('#C9A96E','金色'), ('#C0C0C0','銀色')],
-            'message': '今天穿上金屬光澤或純淨白，讓你的清醒與自信一眼可見。'},
+            'message': '今天清醒而自信，穿出金屬般的光芒。'},
         2: {'element': '水', 'english': 'Water', 'color': '#2C6E8A', 'bg': '#EEF5F8',
-            'colors': [('#1A1A2E','深藍黑'), ('#2C6E8A','藏青藍'), ('#4A4A6A','靛紫灰')],
             'message': '深邃的水色系，讓你的智慧與沉靜在今天最閃耀。'},
         3: {'element': '火', 'english': 'Fire', 'color': '#A83222', 'bg': '#FDF0EE',
-            'colors': [('#A83222','酒紅'), ('#E8601C','橙紅'), ('#7B2D8B','深紫')],
             'message': '今天用火的溫度點亮自己，大膽穿出你最有力量的顏色。'},
         4: {'element': '木', 'english': 'Wood', 'color': '#3E6B45', 'bg': '#EEF5EF',
-            'colors': [('#3E6B45','森林綠'), ('#6BAF7A','嫩草綠'), ('#5B9E9E','青碧色')],
             'message': '今天用自然的綠意提醒自己：紮根，才能向上生長。'},
         5: {'element': '土', 'english': 'Earth', 'color': '#7A5C1E', 'bg': '#F8F3EA',
             'colors': [('#C8A96E','暖駝色'), ('#7A5C1E','深棕'), ('#E8D5B0','米麥色')],
@@ -196,19 +213,26 @@ def daily():
             'colors': [('#FFFFFF','白色'), ('#C9A96E','金色'), ('#C0C0C0','銀色')],
             'message': '今天穿上金屬光澤或純淨白，讓你的清醒與自信一眼可見。'},
         7: {'element': '水', 'english': 'Water', 'color': '#2C6E8A', 'bg': '#EEF5F8',
-            'colors': [('#1A1A2E','深藍黑'), ('#2C6E8A','藏青藍'), ('#4A4A6A','靛紫灰')],
             'message': '深邃的水色系，讓你的智慧與沉靜在今天最閃耀。'},
         8: {'element': '火', 'english': 'Fire', 'color': '#A83222', 'bg': '#FDF0EE',
-            'colors': [('#A83222','酒紅'), ('#E8601C','橙紅'), ('#7B2D8B','深紫')],
             'message': '今天用火的溫度點亮自己，大膽穿出你最有力量的顏色。'},
         9: {'element': '木', 'english': 'Wood', 'color': '#3E6B45', 'bg': '#EEF5EF',
-            'colors': [('#3E6B45','森林綠'), ('#6BAF7A','嫩草綠'), ('#5B9E9E','青碧色')],
             'message': '今天用自然的綠意提醒自己：紮根，才能向上生長。'},
     }
 
     info = DAILY_DATA[number]
     date_label = f"{today.year}年{today.month}月{today.day}日"
-    return render_template('daily.html', today=date_label, number=number, info=info)
+    return render_template('daily.html',
+        today=date_label,
+        number=number,
+        info=info,
+        noble_colors=ELEMENTS[noble_elem]['colors'],
+        noble_elem=noble_elem,
+        self_colors=ELEMENTS[daily_elem]['colors'],
+        self_elem=daily_elem,
+        drain_colors=ELEMENTS[drain_elem]['colors'],
+        drain_elem=drain_elem,
+    )
 
 
 @app.route('/gift')

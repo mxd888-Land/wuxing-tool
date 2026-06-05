@@ -29,33 +29,16 @@
       padding: 40px 20px 60px;
     }
 
-    /* 品牌標題 */
-    .brand {
-      text-align: center;
-      margin-bottom: 32px;
-    }
-    .brand-name {
-      font-size: 22px;
-      color: var(--primary);
-      letter-spacing: 8px;
-      font-weight: 600;
-    }
-    .brand-sub {
-      font-size: 11px;
-      color: var(--gold);
-      letter-spacing: 4px;
-      margin-top: 5px;
-    }
+    .brand { text-align: center; margin-bottom: 32px; }
+    .brand-name { font-size: 22px; color: var(--primary); letter-spacing: 8px; font-weight: 600; }
+    .brand-sub  { font-size: 11px; color: var(--gold); letter-spacing: 4px; margin-top: 5px; }
 
-    /* 分隔線 */
     .divider {
-      width: 60px;
-      height: 1px;
+      width: 60px; height: 1px;
       background: linear-gradient(to right, transparent, var(--gold), transparent);
       margin: 0 auto 32px;
     }
 
-    /* 主卡片 */
     .card {
       background: var(--light);
       border-radius: 16px;
@@ -66,129 +49,88 @@
       text-align: center;
     }
 
-    .date-label {
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: 3px;
-      margin-bottom: 6px;
-    }
+    .date-label { font-size: 12px; color: var(--muted); letter-spacing: 3px; margin-bottom: 6px; }
+    .date-value { font-size: 18px; color: var(--primary); letter-spacing: 2px; font-weight: 600; margin-bottom: 28px; }
 
-    .date-value {
-      font-size: 18px;
-      color: var(--primary);
-      letter-spacing: 2px;
-      font-weight: 600;
-      margin-bottom: 28px;
-    }
-
-    /* 流日數字 */
-    .number-wrap {
-      margin-bottom: 28px;
-    }
-    .number-label {
-      font-size: 11px;
-      color: var(--gold);
-      letter-spacing: 4px;
-      margin-bottom: 10px;
-    }
+    .number-wrap { margin-bottom: 28px; }
+    .number-label { font-size: 11px; color: var(--gold); letter-spacing: 4px; margin-bottom: 10px; }
     .number-circle {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: var(--primary);
-      color: var(--light);
-      font-size: 32px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--primary); color: var(--light);
+      font-size: 32px; font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
       margin: 0 auto;
-      letter-spacing: 0;
       box-shadow: 0 4px 16px rgba(123,26,46,0.25);
     }
 
-    /* 五行 */
-    .element-wrap {
-      margin-bottom: 32px;
+    .element-wrap { margin-bottom: 32px; }
+    .element-label { font-size: 11px; color: var(--muted); letter-spacing: 3px; margin-bottom: 8px; }
+    .element-name  { font-size: 28px; font-weight: 600; letter-spacing: 4px; }
+    .element-en    { font-size: 12px; letter-spacing: 3px; margin-top: 4px; opacity: 0.7; }
+
+    /* 三個色區塊 */
+    .color-section { margin-bottom: 20px; }
+
+    .color-section-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
     }
-    .element-label {
+    .color-section-badge {
+      font-size: 11px;
+      letter-spacing: 2px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-noble  { background: #FFF3E0; color: #A0660A; border: 1px solid #C9A96E; }
+    .badge-coop   { background: #FDF0EE; color: #7B1A2E; border: 1px solid #C9818A; }
+    .badge-drain  { background: #F2F2F2; color: #777;    border: 1px solid #CCC; }
+
+    .color-section-desc {
       font-size: 11px;
       color: var(--muted);
-      letter-spacing: 3px;
-      margin-bottom: 8px;
-    }
-    .element-name {
-      font-size: 28px;
-      font-weight: 600;
-      letter-spacing: 4px;
-    }
-    .element-en {
-      font-size: 12px;
-      letter-spacing: 3px;
-      margin-top: 4px;
-      opacity: 0.7;
+      letter-spacing: 1px;
+      line-height: 1.7;
+      text-align: left;
+      flex: 1;
     }
 
-    /* 幸運色色塊 */
-    .colors-label {
-      font-size: 11px;
-      color: var(--gold);
-      letter-spacing: 4px;
-      margin-bottom: 16px;
-    }
     .swatches {
       display: flex;
       justify-content: center;
       gap: 16px;
-      margin-bottom: 32px;
+      margin-bottom: 6px;
     }
-    .swatch {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
+    .swatch { display: flex; flex-direction: column; align-items: center; gap: 8px; }
     .swatch-circle {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      border: 2px solid rgba(0,0,0,0.06);
+      width: 52px; height: 52px; border-radius: 50%;
+      border: 2px solid rgba(0,0,0,0.07);
       box-shadow: 0 2px 8px rgba(0,0,0,0.12);
     }
-    .swatch-name {
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 1px;
+    .swatch-circle.drain-style { opacity: 0.45; filter: grayscale(30%); }
+    .swatch-name { font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+    .swatch-name.drain-style { text-decoration: line-through; opacity: 0.6; }
+
+    .section-divider {
+      width: 100%; height: 1px;
+      background: linear-gradient(to right, transparent, #DDD, transparent);
+      margin: 20px 0;
     }
 
     /* 每日訊息 */
     .message {
-      font-size: 14px;
-      color: var(--text);
-      line-height: 2;
-      letter-spacing: 0.5px;
-      padding: 20px;
-      background: var(--bg);
-      border-radius: 10px;
+      font-size: 14px; color: var(--text);
+      line-height: 2; letter-spacing: 0.5px;
+      padding: 20px; background: var(--bg); border-radius: 10px;
+      margin-top: 8px;
     }
 
-    /* 頁尾 */
-    .footer {
-      margin-top: 40px;
-      text-align: center;
-    }
-    .footer-tagline {
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: 3px;
-    }
-    .footer-brand {
-      font-size: 13px;
-      color: var(--primary);
-      letter-spacing: 4px;
-      margin-top: 8px;
-      font-weight: 600;
-    }
+    .footer { margin-top: 40px; text-align: center; }
+    .footer-tagline { font-size: 12px; color: var(--muted); letter-spacing: 3px; }
+    .footer-brand   { font-size: 13px; color: var(--primary); letter-spacing: 4px; margin-top: 8px; font-weight: 600; }
   </style>
 </head>
 <body>
@@ -213,17 +155,61 @@
     <div class="element-wrap">
       <div class="element-label">今 日 五 行</div>
       <div class="element-name" style="color: {{ info.color }};">{{ info.element }}</div>
-      <div class="element-en" style="color: {{ info.color }};">{{ info.english }}</div>
+      <div class="element-en"   style="color: {{ info.color }};">{{ info.english }}</div>
     </div>
 
-    <div class="colors-label">今 日 穿 衣 幸 運 色</div>
-    <div class="swatches">
-      {% for hex, name in info.colors %}
-      <div class="swatch">
-        <div class="swatch-circle" style="background: {{ hex }};"></div>
-        <div class="swatch-name">{{ name }}</div>
+    <div class="section-divider"></div>
+
+    <!-- 貴人色 -->
+    <div class="color-section">
+      <div class="color-section-header">
+        <span class="color-section-badge badge-noble">✦ 貴人色｜{{ noble_elem }}</span>
+        <span class="color-section-desc">輕鬆愉快，貴人加持</span>
       </div>
-      {% endfor %}
+      <div class="swatches">
+        {% for hex, name in noble_colors %}
+        <div class="swatch">
+          <div class="swatch-circle" style="background: {{ hex }};"></div>
+          <div class="swatch-name">{{ name }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 合作幸運色 -->
+    <div class="color-section">
+      <div class="color-section-header">
+        <span class="color-section-badge badge-coop">◈ 合作色｜{{ self_elem }}</span>
+        <span class="color-section-desc">商務合作，互利共贏</span>
+      </div>
+      <div class="swatches">
+        {% for hex, name in self_colors %}
+        <div class="swatch">
+          <div class="swatch-circle" style="background: {{ hex }};"></div>
+          <div class="swatch-name">{{ name }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- 消耗色 -->
+    <div class="color-section">
+      <div class="color-section-header">
+        <span class="color-section-badge badge-drain">✕ 消耗色｜{{ drain_elem }}</span>
+        <span class="color-section-desc">今日不推薦，做事較累</span>
+      </div>
+      <div class="swatches">
+        {% for hex, name in drain_colors %}
+        <div class="swatch">
+          <div class="swatch-circle drain-style" style="background: {{ hex }};"></div>
+          <div class="swatch-name drain-style">{{ name }}</div>
+        </div>
+        {% endfor %}
+      </div>
     </div>
 
     <div class="message">{{ info.message }}</div>
