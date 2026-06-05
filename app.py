@@ -168,8 +168,9 @@ def calculate():
 
 @app.route('/daily')
 def daily():
-    from datetime import date
-    today = date.today()
+    from datetime import datetime
+    import pytz
+    today = datetime.now(pytz.timezone('Asia/Taipei')).date()
     digits = [int(d) for d in today.strftime('%Y%m%d')]
     total = sum(digits)
     while total >= 10:
@@ -304,7 +305,8 @@ def register_success():
 def broadcast_daily():
     """每日幸運色推播，讓 cron-job.org 每天早上呼叫此路由"""
     import requests as req
-    from datetime import date
+    from datetime import datetime
+    import pytz
 
     CHANNEL_ID     = "2009971178"
     CHANNEL_SECRET = "1e4043dd9bd72c6ffdd5f5555714152e"
@@ -323,8 +325,8 @@ def broadcast_daily():
     if not token:
         return "token error", 500
 
-    # 計算流日
-    today = date.today()
+    # 計算流日（台灣時間）
+    today = datetime.now(pytz.timezone('Asia/Taipei')).date()
     total = sum(int(d) for d in today.strftime('%Y%m%d'))
     while total >= 10:
         total = sum(int(d) for d in str(total))
