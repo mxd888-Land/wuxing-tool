@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>領取你的禮物｜美想道</title>
+<title>五行色彩能量與風格關鍵詞｜美想道</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,112 +27,223 @@ body {
 }
 
 .header {
-  width: 100%;
-  max-width: 480px;
+  width: 100%; max-width: 480px;
   text-align: center;
   padding: 44px 0 24px;
   border-bottom: 1px solid var(--gold);
-  margin-bottom: 36px;
+  margin-bottom: 32px;
 }
 .brand     { font-size: 22px; color: var(--primary); letter-spacing: 6px; font-weight: 700; }
 .brand-sub { font-size: 11px; color: var(--gold); letter-spacing: 4px; margin-top: 5px; }
 
 .main { width: 100%; max-width: 480px; }
 
-.gift-card {
-  background: var(--light);
-  border-radius: 20px;
-  padding: 40px 28px 36px;
+/* ── Page title ── */
+.page-title {
   text-align: center;
-  box-shadow: 0 6px 30px rgba(123,26,46,0.10);
-  margin-bottom: 24px;
-  position: relative;
-  overflow: hidden;
+  margin-bottom: 32px;
 }
-.gift-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  background: linear-gradient(to right, var(--primary), var(--gold), var(--primary));
-}
-
-.gift-icon {
-  font-size: 52px;
-  margin-bottom: 18px;
-  display: block;
-}
-
-.gift-label {
-  font-size: 12px;
-  color: var(--muted);
+.page-label {
+  font-size: 11px;
+  color: var(--gold);
   letter-spacing: 4px;
   margin-bottom: 12px;
 }
-
-.gift-title {
-  font-size: 22px;
+.page-h1 {
+  font-size: 20px;
   color: var(--primary);
-  font-weight: 700;
   letter-spacing: 3px;
-  margin-bottom: 8px;
+  font-weight: 700;
+  line-height: 1.6;
+  margin-bottom: 10px;
 }
-
-.gift-subtitle {
+.page-sub {
   font-size: 13px;
-  color: var(--gold);
-  letter-spacing: 2px;
-  margin-bottom: 28px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  line-height: 1.9;
 }
 
 .divider {
   height: 1px;
   background: linear-gradient(to right, transparent, var(--gold), transparent);
-  margin: 24px 0;
+  margin: 28px 0;
 }
 
-.gift-desc {
+/* ── Element card ── */
+.elem-card {
+  background: var(--light);
+  border-radius: 20px;
+  padding: 28px 22px 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(123,26,46,0.07);
+  position: relative;
+  overflow: hidden;
+}
+.elem-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+}
+.card-metal::before  { background: linear-gradient(to right, #C0C0C0, #C9A96E, #C0C0C0); }
+.card-water::before  { background: linear-gradient(to right, #1A2E4A, #2C6E8A, #1A2E4A); }
+.card-fire::before   { background: linear-gradient(to right, #7B1A2E, #A83222, #7B1A2E); }
+.card-wood::before   { background: linear-gradient(to right, #3E6B45, #6BAF7A, #3E6B45); }
+.card-earth::before  { background: linear-gradient(to right, #A0724A, #C8A96E, #A0724A); }
+
+/* Card header */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.elem-circle {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 2px solid;
+}
+.elem-char { font-size: 28px; font-weight: 700; line-height: 1; }
+.elem-en   { font-size: 9px; letter-spacing: 1px; margin-top: 3px; opacity: 0.75; }
+
+.card-metal  .elem-circle { background: #F8F4EE; border-color: #B8860B; }
+.card-metal  .elem-char   { color: #B8860B; }
+.card-metal  .elem-en     { color: #B8860B; }
+.card-water  .elem-circle { background: #EEF5F8; border-color: #2C6E8A; }
+.card-water  .elem-char   { color: #2C6E8A; }
+.card-water  .elem-en     { color: #2C6E8A; }
+.card-fire   .elem-circle { background: #FDF0EE; border-color: #A83222; }
+.card-fire   .elem-char   { color: #A83222; }
+.card-fire   .elem-en     { color: #A83222; }
+.card-wood   .elem-circle { background: #EEF5EF; border-color: #3E6B45; }
+.card-wood   .elem-char   { color: #3E6B45; }
+.card-wood   .elem-en     { color: #3E6B45; }
+.card-earth  .elem-circle { background: #F8F3EA; border-color: #7A5C1E; }
+.card-earth  .elem-char   { color: #7A5C1E; }
+.card-earth  .elem-en     { color: #7A5C1E; }
+
+.card-info { flex: 1; }
+.card-tagline {
   font-size: 15px;
-  line-height: 2.0;
-  color: #4A3328;
-  letter-spacing: 0.5px;
-  text-align: left;
-  margin-bottom: 28px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+.card-metal  .card-tagline { color: #B8860B; }
+.card-water  .card-tagline { color: #2C6E8A; }
+.card-fire   .card-tagline { color: #A83222; }
+.card-wood   .card-tagline { color: #3E6B45; }
+.card-earth  .card-tagline { color: #7A5C1E; }
+
+.card-energy {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 1px;
+  line-height: 1.7;
 }
 
-.download-btn {
+/* Color swatches */
+.swatch-label {
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.swatches {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.swatch {
+  flex: 1;
+  text-align: center;
+}
+.swatch-dot {
+  width: 100%;
+  padding-top: 100%;
+  border-radius: 50%;
+  margin-bottom: 5px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+.swatch-name {
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+}
+
+/* Keywords */
+.kw-label {
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 18px;
+}
+.kw-tag {
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  border: 1px solid;
+}
+.card-metal  .kw-tag { color: #B8860B; border-color: #B8860B; background: #FDF8EE; }
+.card-water  .kw-tag { color: #2C6E8A; border-color: #2C6E8A; background: #EEF5F8; }
+.card-fire   .kw-tag { color: #A83222; border-color: #A83222; background: #FDF0EE; }
+.card-wood   .kw-tag { color: #3E6B45; border-color: #3E6B45; background: #EEF5EF; }
+.card-earth  .kw-tag { color: #7A5C1E; border-color: #7A5C1E; background: #F8F3EA; }
+
+/* Style note */
+.style-note {
+  font-size: 13px;
+  color: #4A3328;
+  line-height: 2;
+  letter-spacing: 0.5px;
+  padding: 12px 14px;
+  border-radius: 0 10px 10px 0;
+  border-left: 3px solid var(--gold);
+  background: var(--bg);
+}
+
+/* CTA */
+.cta-section {
+  text-align: center;
+  margin-top: 8px;
+}
+.cta-label {
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+.cta-btn {
   display: block;
   width: 100%;
-  padding: 18px 16px;
+  padding: 17px;
   background: var(--primary);
   color: var(--light);
   text-decoration: none;
   text-align: center;
   border-radius: 12px;
   font-family: 'Noto Serif TC', serif;
-  font-size: 16px;
+  font-size: 15px;
   letter-spacing: 3px;
-  font-weight: 600;
-  transition: background 0.2s, transform 0.1s;
+  margin-bottom: 14px;
+  transition: background 0.2s;
 }
-.download-btn:active { background: #5C1220; transform: scale(0.98); }
-.download-sub {
-  font-size: 12px;
-  opacity: 0.75;
-  display: block;
-  margin-top: 5px;
-  letter-spacing: 1px;
-  font-weight: 400;
-}
-
-.hint {
-  text-align: center;
-  font-size: 12px;
-  color: var(--muted);
-  letter-spacing: 1px;
-  line-height: 1.9;
-  margin-top: 16px;
-}
+.cta-btn:active { background: #5C1220; }
 
 .back-link {
   display: block;
@@ -142,11 +253,10 @@ body {
   text-decoration: none;
   letter-spacing: 2px;
   padding: 10px;
-  margin-top: 8px;
 }
 
 .footer {
-  margin-top: 32px;
+  margin-top: 36px;
   font-size: 11px;
   color: #B09080;
   text-align: center;
@@ -163,28 +273,262 @@ body {
 
 <div class="main">
 
-  <div class="gift-card">
-    <span class="gift-icon">🎁</span>
-    <div class="gift-label">專 屬 禮 物</div>
-    <div class="gift-title">五行穿搭速查表</div>
-    <div class="gift-subtitle">知道自己的五行，穿對屬於你的能量</div>
-
-    <div class="divider"></div>
-
-    <p class="gift-desc">
-      這份速查表，讓你一眼看懂自己的五行屬性對應哪些顏色、材質與風格，<br><br>
-      從今天起，每次打開衣櫃都能穿出最好的自己。
-    </p>
-
-    <a href="https://drive.google.com/uc?export=download&id=1rJawShyyMLxMwOHVM-di1T_amxV6R24r" class="download-btn">
-      立即下載
-      <span class="download-sub">點擊即可儲存 PDF</span>
-    </a>
-
-    <p class="hint">若無法下載，請長按按鈕選擇「在瀏覽器中開啟」</p>
+  <div class="page-title">
+    <div class="page-label">✦ 專 屬 禮 物</div>
+    <h1 class="page-h1">我的五行色彩能量<br>與風格關鍵詞</h1>
+    <p class="page-sub">找到你的天生能量色，<br>每一次穿搭都是一次自我表達。</p>
   </div>
 
-  <a href="/" class="back-link">← 回 到 五 行 測 算</a>
+  <div class="divider"></div>
+
+  <!-- 金 Metal -->
+  <div class="elem-card card-metal">
+    <div class="card-header">
+      <div class="elem-circle">
+        <div class="elem-char">金</div>
+        <div class="elem-en">METAL</div>
+      </div>
+      <div class="card-info">
+        <div class="card-tagline">清醒自信，以光引路</div>
+        <div class="card-energy">K值：1 / 6　｜　天生領導者能量</div>
+      </div>
+    </div>
+
+    <div class="swatch-label">✦ 能量色彩</div>
+    <div class="swatches">
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#FFFFFF; border: 1px solid #E0D0C0;"></div>
+        <div class="swatch-name">純白</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#C9A96E;"></div>
+        <div class="swatch-name">金色</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#C0C0C0;"></div>
+        <div class="swatch-name">銀色</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#F5E6C8;"></div>
+        <div class="swatch-name">香檳</div>
+      </div>
+    </div>
+
+    <div class="kw-label">✦ 風格關鍵詞</div>
+    <div class="keywords">
+      <span class="kw-tag">俐落</span>
+      <span class="kw-tag">極簡</span>
+      <span class="kw-tag">結構感</span>
+      <span class="kw-tag">光澤</span>
+      <span class="kw-tag">精準</span>
+      <span class="kw-tag">高冷</span>
+    </div>
+
+    <div class="style-note">
+      乾淨的線條與金屬光澤，讓你的存在本身就是一種宣言。避免過多裝飾，用簡約傳遞力量。
+    </div>
+  </div>
+
+  <!-- 水 Water -->
+  <div class="elem-card card-water">
+    <div class="card-header">
+      <div class="elem-circle">
+        <div class="elem-char">水</div>
+        <div class="elem-en">WATER</div>
+      </div>
+      <div class="card-info">
+        <div class="card-tagline">靜水深流，智慧無聲</div>
+        <div class="card-energy">K值：2 / 7　｜　深邃洞察者能量</div>
+      </div>
+    </div>
+
+    <div class="swatch-label">✦ 能量色彩</div>
+    <div class="swatches">
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#1A2E4A;"></div>
+        <div class="swatch-name">深藍黑</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#2C6E8A;"></div>
+        <div class="swatch-name">藏青藍</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#4A3A6A;"></div>
+        <div class="swatch-name">靛紫</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#7A8A9A;"></div>
+        <div class="swatch-name">霧灰藍</div>
+      </div>
+    </div>
+
+    <div class="kw-label">✦ 風格關鍵詞</div>
+    <div class="keywords">
+      <span class="kw-tag">層次感</span>
+      <span class="kw-tag">知性</span>
+      <span class="kw-tag">低調奢華</span>
+      <span class="kw-tag">流動</span>
+      <span class="kw-tag">霧感</span>
+      <span class="kw-tag">深邃</span>
+    </div>
+
+    <div class="style-note">
+      深色系的飄逸材質，讓你的智慧在沉靜中自然散發。少即是多，留白是你最強的風格語言。
+    </div>
+  </div>
+
+  <!-- 火 Fire -->
+  <div class="elem-card card-fire">
+    <div class="card-header">
+      <div class="elem-circle">
+        <div class="elem-char">火</div>
+        <div class="elem-en">FIRE</div>
+      </div>
+      <div class="card-info">
+        <div class="card-tagline">烈焰生光，熱情無畏</div>
+        <div class="card-energy">K值：3 / 8　｜　熱情創造者能量</div>
+      </div>
+    </div>
+
+    <div class="swatch-label">✦ 能量色彩</div>
+    <div class="swatches">
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#7B1A2E;"></div>
+        <div class="swatch-name">酒紅</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#A83222;"></div>
+        <div class="swatch-name">磚紅</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#E8601C;"></div>
+        <div class="swatch-name">橙紅</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#7B2D8B;"></div>
+        <div class="swatch-name">深紫</div>
+      </div>
+    </div>
+
+    <div class="kw-label">✦ 風格關鍵詞</div>
+    <div class="keywords">
+      <span class="kw-tag">大膽</span>
+      <span class="kw-tag">鮮明</span>
+      <span class="kw-tag">個性</span>
+      <span class="kw-tag">撞色</span>
+      <span class="kw-tag">生命力</span>
+      <span class="kw-tag">搶眼</span>
+    </div>
+
+    <div class="style-note">
+      飽和的色彩與大膽的搭配，是你最真實的自我表達。你走進哪裡，哪裡就有溫度。
+    </div>
+  </div>
+
+  <!-- 木 Wood -->
+  <div class="elem-card card-wood">
+    <div class="card-header">
+      <div class="elem-circle">
+        <div class="elem-char">木</div>
+        <div class="elem-en">WOOD</div>
+      </div>
+      <div class="card-info">
+        <div class="card-tagline">深根靜長，自然綻放</div>
+        <div class="card-energy">K值：4 / 9　｜　沉穩生長者能量</div>
+      </div>
+    </div>
+
+    <div class="swatch-label">✦ 能量色彩</div>
+    <div class="swatches">
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#3E6B45;"></div>
+        <div class="swatch-name">森林綠</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#6BAF7A;"></div>
+        <div class="swatch-name">嫩草綠</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#7A6A3E;"></div>
+        <div class="swatch-name">橄欖棕</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#B8C4A0;"></div>
+        <div class="swatch-name">灰綠</div>
+      </div>
+    </div>
+
+    <div class="kw-label">✦ 風格關鍵詞</div>
+    <div class="keywords">
+      <span class="kw-tag">自然</span>
+      <span class="kw-tag">有條理</span>
+      <span class="kw-tag">清爽</span>
+      <span class="kw-tag">紮實感</span>
+      <span class="kw-tag">有機感</span>
+      <span class="kw-tag">清晰</span>
+    </div>
+
+    <div class="style-note">
+      大地色系與自然材質，讓你的可靠與溫暖一眼可見。清爽有條理的搭配，就是你最強的氣場。
+    </div>
+  </div>
+
+  <!-- 土 Earth -->
+  <div class="elem-card card-earth">
+    <div class="card-header">
+      <div class="elem-circle">
+        <div class="elem-char">土</div>
+        <div class="elem-en">EARTH</div>
+      </div>
+      <div class="card-info">
+        <div class="card-tagline">大地為心，豐盛包容</div>
+        <div class="card-energy">K值：5　｜　豐盛包容者能量</div>
+      </div>
+    </div>
+
+    <div class="swatch-label">✦ 能量色彩</div>
+    <div class="swatches">
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#C8A96E;"></div>
+        <div class="swatch-name">暖駝色</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#E8D5B0;"></div>
+        <div class="swatch-name">米麥色</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#A0724A;"></div>
+        <div class="swatch-name">焦糖棕</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-dot" style="background:#F5EDD8;"></div>
+        <div class="swatch-name">奶油白</div>
+      </div>
+    </div>
+
+    <div class="kw-label">✦ 風格關鍵詞</div>
+    <div class="keywords">
+      <span class="kw-tag">溫暖</span>
+      <span class="kw-tag">包容</span>
+      <span class="kw-tag">舒適</span>
+      <span class="kw-tag">柔和</span>
+      <span class="kw-tag">親切感</span>
+      <span class="kw-tag">豐盛</span>
+    </div>
+
+    <div class="style-note">
+      溫暖的駝色系與舒適的材質，讓你成為空間裡最安定的存在。你的包容力，就是你最美的風格。
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <p class="cta-label">想更深入了解你的五行能量？</p>
+    <a href="/register?openExternalBrowser=1" class="cta-btn">了解風格覺醒營</a>
+    <a href="/" class="back-link">← 重 新 測 算 五 行</a>
+  </div>
 
 </div>
 
