@@ -15,6 +15,7 @@ GMAIL_USER = 'tangyuxi1002@gmail.com'
 GMAIL_RECIPIENT = 'mxd@mxdyes.com'
 
 GAMMA_LINK = 'https://gamma.app/docs/-df8wl8nfu0ykcin?openExternalBrowser=1'
+LINE_OA_LINK = 'https://line.me/R/ti/p/@957rbcbx'
 
 ELEMENT_DATA = {
     1: {
@@ -162,6 +163,42 @@ def calculate():
             k_value=result['K'],
             element_info=element_info,
             gamma_link=GAMMA_LINK,
+        )
+    except (ValueError, KeyError):
+        return render_template('index.html', error='請輸入有效的出生日期')
+
+
+@app.route('/quiz')
+def quiz():
+    return render_template('index.html', form_action='/quiz/calculate')
+
+
+@app.route('/quiz/calculate', methods=['POST'])
+def quiz_calculate():
+    try:
+        from datetime import date as DateType
+        year  = int(request.form['year'])
+        month = int(request.form['month'])
+        day   = int(request.form['day'])
+        birth = DateType(year, month, day)
+        result = calculate_wuxing(birth.year, birth.month, birth.day)
+        element_info = ELEMENT_DATA[result['K']]
+
+        conn = get_db()
+        conn.execute(
+            'INSERT INTO calculations (birth_date, k_value, element) VALUES (?, ?, ?)',
+            (birth.isoformat(), result['K'], result['element'])
+        )
+        conn.commit()
+        conn.close()
+
+        birth_label = f"{birth.year}年{birth.month}月{birth.day}日"
+        return render_template(
+            'result.html',
+            birth_date=birth_label,
+            k_value=result['K'],
+            element_info=element_info,
+            gamma_link=LINE_OA_LINK,
         )
     except (ValueError, KeyError):
         return render_template('index.html', error='請輸入有效的出生日期')

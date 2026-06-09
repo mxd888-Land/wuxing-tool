@@ -151,7 +151,7 @@ button:active { background: #5C1220; transform: scale(0.98); }
     <div class="error">{{ error }}</div>
     {% endif %}
 
-    <form action="/calculate" method="POST">
+    <form action="{{ form_action | default('/calculate') }}" method="POST">
       <label>出 生 日 期</label>
       <div class="date-row">
         <select name="day" required>
