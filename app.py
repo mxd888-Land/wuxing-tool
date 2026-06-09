@@ -15,7 +15,7 @@ GMAIL_USER = 'tangyuxi1002@gmail.com'
 GMAIL_RECIPIENT = 'mxd@mxdyes.com'
 
 GAMMA_LINK = 'https://gamma.app/docs/-df8wl8nfu0ykcin?openExternalBrowser=1'
-LINE_OA_LINK = 'https://line.me/R/ti/p/@957rbcbx'
+LINE_OA_LINK = 'https://line.me/R/ti/p/@919elwkg'
 
 ELEMENT_DATA = {
     1: {
