@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>免費線上研討會・8/26｜美想道</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --primary: #7B1A2E;
+  --bg:      #F0E6D8;
+  --gold:    #C9A96E;
+  --text:    #3D2B1F;
+  --light:   #FDFAF6;
+  --muted:   #8B6055;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Serif TC', serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px 60px;
+}
+
+.header {
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  padding: 44px 0 24px;
+  border-bottom: 1px solid var(--gold);
+  margin-bottom: 36px;
+}
+.logo      { width: 130px; display: block; margin: -18px auto -16px; }
+.brand     { font-size: 22px; color: var(--primary); letter-spacing: 6px; font-weight: 700; }
+.brand-sub { font-size: 11px; color: var(--gold); letter-spacing: 4px; margin-top: 5px; }
+
+.main { width: 100%; max-width: 480px; }
+
+/* ── Hero ── */
+.hero { text-align: center; margin-bottom: 32px; }
+.hero-badge {
+  display: inline-block;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  border: 1px solid var(--gold);
+  padding: 4px 16px;
+  border-radius: 20px;
+  margin-bottom: 18px;
+}
+.hero-title {
+  font-size: 32px;
+  color: var(--primary);
+  letter-spacing: 4px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.hero-tagline {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 5px;
+  margin-bottom: 20px;
+}
+.hero-sub {
+  font-size: 15px;
+  color: #4A3328;
+  letter-spacing: 1px;
+  line-height: 2;
+  margin-bottom: 24px;
+}
+
+/* ── Date card ── */
+.date-card {
+  background: var(--primary);
+  border-radius: 18px;
+  padding: 26px 24px;
+  text-align: center;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.date-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+.date-label { font-size: 11px; color: rgba(201,169,110,0.75); letter-spacing: 4px; margin-bottom: 14px; }
+.date-main  { font-size: 30px; color: var(--gold); font-weight: 700; letter-spacing: 2px; line-height: 1.3; margin-bottom: 6px; }
+.date-time  { font-size: 16px; color: rgba(255,255,255,0.85); letter-spacing: 3px; margin-bottom: 14px; }
+.date-divider { height: 1px; background: rgba(201,169,110,0.25); margin: 14px 0; }
+.date-note  { font-size: 12px; color: rgba(255,255,255,0.55); letter-spacing: 2px; line-height: 1.9; }
+.date-free  {
+  display: inline-block;
+  font-size: 13px;
+  color: var(--gold);
+  border: 1px solid rgba(201,169,110,0.5);
+  border-radius: 20px;
+  padding: 4px 18px;
+  letter-spacing: 3px;
+  margin-top: 4px;
+}
+
+/* ── Countdown ── */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0 28px;
+}
+.cd-box {
+  background: var(--light);
+  border: 1px solid rgba(201,169,110,0.5);
+  border-radius: 12px;
+  padding: 12px 0 10px;
+  width: 72px;
+  text-align: center;
+}
+.cd-num  { font-size: 24px; color: var(--primary); font-weight: 700; line-height: 1; }
+.cd-unit { font-size: 10px; color: var(--muted); letter-spacing: 2px; margin-top: 6px; }
+
+.cta-btn {
+  display: block;
+  width: 100%;
+  padding: 17px;
+  background: var(--primary);
+  color: var(--light);
+  text-decoration: none;
+  text-align: center;
+  border-radius: 10px;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 16px;
+  letter-spacing: 5px;
+  transition: background 0.2s, transform 0.1s;
+}
+.cta-btn:active { background: #5C1220; transform: scale(0.98); }
+.cta-note {
+  font-size: 12px;
+  color: #A08070;
+  text-align: center;
+  letter-spacing: 2px;
+  margin-top: 12px;
+}
+
+/* ── Section ── */
+.section-label {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-size: 21px;
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-align: center;
+  margin-bottom: 22px;
+  line-height: 1.5;
+}
+
+/* ── Pain points ── */
+.pain-card {
+  background: var(--light);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  box-shadow: 0 2px 12px rgba(123,26,46,0.05);
+}
+.pain-mark {
+  color: var(--gold);
+  font-size: 18px;
+  line-height: 1.6;
+  flex-shrink: 0;
+}
+.pain-text { font-size: 14px; letter-spacing: 1px; line-height: 1.9; color: #4A3328; }
+
+.pain-closing {
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  line-height: 2.1;
+  margin-top: 20px;
+}
+.pain-closing strong { color: var(--primary); font-weight: 700; }
+
+/* ── Learn list ── */
+.learn-card {
+  background: var(--light);
+  border-radius: 16px;
+  padding: 24px 22px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 12px rgba(123,26,46,0.05);
+  border-left: 3px solid var(--gold);
+}
+.learn-num   { font-size: 12px; color: var(--gold); letter-spacing: 3px; margin-bottom: 8px; }
+.learn-title { font-size: 16px; color: var(--primary); font-weight: 700; letter-spacing: 2px; margin-bottom: 8px; }
+.learn-desc  { font-size: 13px; color: #5A4437; letter-spacing: 1px; line-height: 1.9; }
+
+/* ── For who ── */
+.who-list { list-style: none; }
+.who-list li {
+  font-size: 14px;
+  color: #4A3328;
+  letter-spacing: 1px;
+  line-height: 1.9;
+  padding: 12px 0 12px 30px;
+  border-bottom: 1px dashed rgba(201,169,110,0.4);
+  position: relative;
+}
+.who-list li:last-child { border-bottom: none; }
+.who-list li::before {
+  content: '✦';
+  position: absolute;
+  left: 4px;
+  color: var(--gold);
+}
+
+/* ── Speaker ── */
+.speaker-card {
+  background: var(--light);
+  border-radius: 18px;
+  padding: 30px 24px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(123,26,46,0.05);
+}
+.speaker-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 25%;
+  display: block;
+  margin: 0 auto 20px;
+  border: 2px solid var(--gold);
+  padding: 4px;
+  background: var(--light);
+}
+.speaker-role  { font-size: 11px; color: var(--gold); letter-spacing: 4px; margin-bottom: 10px; }
+.speaker-name  { font-size: 22px; color: var(--primary); font-weight: 700; letter-spacing: 4px; margin-bottom: 14px; }
+.speaker-desc  { font-size: 13px; color: #5A4437; letter-spacing: 1px; line-height: 2.1; text-align: left; }
+
+/* ── Gift ── */
+.gift-card {
+  background: linear-gradient(135deg, #7B1A2E, #5C1220);
+  border-radius: 18px;
+  padding: 28px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.gift-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+.gift-label { font-size: 11px; color: rgba(201,169,110,0.8); letter-spacing: 4px; margin-bottom: 12px; }
+.gift-title { font-size: 18px; color: var(--gold); font-weight: 700; letter-spacing: 2px; margin-bottom: 10px; line-height: 1.6; }
+.gift-desc  { font-size: 13px; color: rgba(255,255,255,0.75); letter-spacing: 1px; line-height: 1.9; }
+
+/* ── Form ── */
+.form-card {
+  background: var(--light);
+  border-radius: 18px;
+  padding: 32px 24px 28px;
+  box-shadow: 0 4px 24px rgba(123,26,46,0.08);
+}
+.form-title {
+  font-size: 17px;
+  color: var(--primary);
+  letter-spacing: 5px;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.form-sub {
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+}
+.field { margin-bottom: 18px; }
+label {
+  display: block;
+  font-size: 12px;
+  color: var(--primary);
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.optional { font-weight: 400; color: var(--muted); font-size: 11px; letter-spacing: 1px; }
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid #D4B8A8;
+  border-radius: 10px;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 15px;
+  color: var(--text);
+  background: var(--bg);
+  outline: none;
+  transition: border-color 0.2s;
+}
+input:focus { border-color: var(--primary); }
+input::placeholder { color: #C4A898; font-size: 13px; }
+
+.submit-btn {
+  width: 100%;
+  padding: 17px;
+  background: var(--primary);
+  color: var(--light);
+  border: none;
+  border-radius: 10px;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 16px;
+  letter-spacing: 5px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s, transform 0.1s;
+}
+.submit-btn:active { background: #5C1220; transform: scale(0.98); }
+.form-note {
+  font-size: 12px;
+  color: #A08070;
+  text-align: center;
+  letter-spacing: 1px;
+  line-height: 2;
+  margin-top: 16px;
+}
+
+.error {
+  background: #FDF0EE;
+  color: #A83222;
+  font-size: 13px;
+  text-align: center;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 36px 0;
+}
+
+.footer {
+  margin-top: 36px;
+  font-size: 11px;
+  color: #B09080;
+  text-align: center;
+  letter-spacing: 3px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <img src="/static/mxd_logo.png" alt="MXD 美想道" class="logo">
+  <div class="brand">美 想 道</div>
+  <div class="brand-sub">MEI XIANG DAO</div>
+</div>
+
+<div class="main">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">免 費 線 上 研 討 會</div>
+    <h1 class="hero-title">找回屬於你的風格能量</h1>
+    <div class="hero-tagline">向 內 觀 己 ・ 向 外 綻 放</div>
+    <p class="hero-sub">當你穿對了自己<br>世界也會為你轉身</p>
+  </div>
+
+  <!-- Date card -->
+  <div class="date-card">
+    <div class="date-label">SAVE THE DATE</div>
+    <div class="date-main">{{ info.date }}（{{ info.weekday }}）</div>
+    <div class="date-time">{{ info.time }}</div>
+    <div class="date-divider"></div>
+    <div class="date-note">線上直播・在家即可參加<br>報名後將透過 LINE / Email 收到參加連結</div>
+    <div class="date-free">全 程 免 費</div>
+  </div>
+
+  <!-- Countdown -->
+  <div class="countdown" id="countdown">
+    <div class="cd-box"><div class="cd-num" id="cd-days">--</div><div class="cd-unit">天</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-hours">--</div><div class="cd-unit">時</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-mins">--</div><div class="cd-unit">分</div></div>
+    <div class="cd-box"><div class="cd-num" id="cd-secs">--</div><div class="cd-unit">秒</div></div>
+  </div>
+
+  <a href="#signup" class="cta-btn">免 費 報 名 佔 位</a>
+  <p class="cta-note">名額有限・額滿即止</p>
+
+  <div class="divider"></div>
+
+  <!-- Pain points -->
+  <div class="section-label">你 是 否 也 有 這 些 困 擾</div>
+  <h2 class="section-title">衣櫃滿滿<br>卻總覺得「沒有一件是自己」</h2>
+
+  <div class="pain-card">
+    <div class="pain-mark">✦</div>
+    <div class="pain-text">跟著流行買了很多衣服，穿上身卻總覺得少了什麼，說不出哪裡不對</div>
+  </div>
+  <div class="pain-card">
+    <div class="pain-mark">✦</div>
+    <div class="pain-text">重要場合前站在鏡子前換了又換，最後還是穿回那件「安全牌」</div>
+  </div>
+  <div class="pain-card">
+    <div class="pain-mark">✦</div>
+    <div class="pain-text">羨慕別人「很有自己的味道」，卻不知道自己的風格從哪裡開始找</div>
+  </div>
+  <div class="pain-card">
+    <div class="pain-mark">✦</div>
+    <div class="pain-text">內在明明已經成長蛻變，外在形象卻還停留在好幾年前</div>
+  </div>
+
+  <p class="pain-closing">
+    這些困擾的根源，其實不在衣服<br>
+    而在於你還沒有真正<strong>認識自己的能量</strong>
+  </p>
+
+  <div class="divider"></div>
+
+  <!-- What you'll learn -->
+  <div class="section-label">60 分 鐘 你 將 獲 得</div>
+  <h2 class="section-title">這場研討會會帶你看見</h2>
+
+  <div class="learn-card">
+    <div class="learn-num">PART 01</div>
+    <div class="learn-title">解讀你的五行能量密碼</div>
+    <div class="learn-desc">從出生日期解析你與生俱來的五行能量，理解為什麼有些顏色和風格穿在你身上就是「對」，有些卻怎麼都不對勁。</div>
+  </div>
+  <div class="learn-card">
+    <div class="learn-num">PART 02</div>
+    <div class="learn-title">向內觀己：看見真實的自己</div>
+    <div class="learn-desc">風格不是模仿別人，而是認識自己。帶你梳理內在特質與外在形象的關係，找到屬於你的風格原點。</div>
+  </div>
+  <div class="learn-card">
+    <div class="learn-num">PART 03</div>
+    <div class="learn-title">向外綻放：穿出你的能量場</div>
+    <div class="learn-desc">學會用色彩與穿搭放大你的天賦能量，讓你在職場、關係、生活中，不用開口就散發屬於你的氣場。</div>
+  </div>
+  <div class="learn-card">
+    <div class="learn-num">PART 04</div>
+    <div class="learn-title">風格蛻變的完整路徑</div>
+    <div class="learn-desc">分享從「向內觀己」到「向外綻放」的完整蛻變地圖，以及如何開始你自己的風格覺醒之旅。</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- For who -->
+  <div class="section-label">適 合 誰 參 加</div>
+  <h2 class="section-title">如果你是這樣的女性<br>這一小時是為你準備的</h2>
+
+  <ul class="who-list">
+    <li>想找到「屬於自己」的風格，不再盲目跟流行的你</li>
+    <li>正處於人生轉變期，希望外在形象跟上內在成長的你</li>
+    <li>對五行、能量、色彩有興趣，想更認識自己的你</li>
+    <li>希望在職場與生活中，更有自信與氣場的你</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <!-- Speaker -->
+  <div class="section-label">主 講 人</div>
+  <div class="speaker-card">
+    <img src="/static/speaker.jpg?v=2" alt="Macy 湯語熙" class="speaker-photo">
+    <div class="speaker-role">美想道 創辦人</div>
+    <div class="speaker-name">Macy 湯語熙</div>
+    <div class="speaker-desc">
+      深耕美學與形象領域多年，陪伴無數女性走過風格蛻變之路。她相信真正的美，是由內而外的——先向內觀己，認識自己的能量與特質，再向外綻放，讓世界看見最真實動人的你。
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Gift -->
+  <div class="section-label">報 名 禮</div>
+  <div class="gift-card">
+    <div class="gift-label">FREE GIFT</div>
+    <div class="gift-title">五行穿搭速查表</div>
+    <div class="gift-desc">完成報名並準時參加研討會<br>即可獲得專屬的五行穿搭速查表 PDF<br>讓你每天都穿對自己的幸運色</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Form -->
+  <div id="signup"></div>
+  <div class="form-card">
+    <div class="form-title">免 費 報 名</div>
+    <div class="form-sub">{{ info.date }}（{{ info.weekday }}）{{ info.time }}・線上直播</div>
+
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form action="/webinar/submit" method="POST">
+      <div class="field">
+        <label>姓 名</label>
+        <input type="text" name="name" placeholder="請輸入您的姓名" required>
+      </div>
+      <div class="field">
+        <label>手 機 號 碼</label>
+        <input type="tel" name="phone" placeholder="請輸入手機號碼" required>
+      </div>
+      <div class="field">
+        <label>E-mail</label>
+        <input type="email" name="email" placeholder="請輸入電子信箱" required>
+      </div>
+      <div class="field">
+        <label>LINE ID <span class="optional">（選填，方便發送直播提醒）</span></label>
+        <input type="text" name="line_id" placeholder="請輸入 LINE ID">
+      </div>
+      <button type="submit" class="submit-btn">立 即 免 費 報 名</button>
+      <p class="form-note">
+        報名完成後，參加連結將於研討會前<br>
+        透過 LINE 與 Email 發送給您
+      </p>
+    </form>
+  </div>
+
+</div>
+
+<div class="footer">向 內 觀 己 ・ 向 外 綻 放</div>
+
+<script>
+(function () {
+  var target = new Date('{{ info.datetime_iso }}').getTime();
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function tick() {
+    var diff = target - Date.now();
+    if (diff <= 0) {
+      document.getElementById('countdown').innerHTML =
+        '<div style="font-size:15px;color:var(--primary);letter-spacing:3px;">研討會即將開始</div>';
+      return;
+    }
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor(diff % 86400000 / 3600000);
+    var m = Math.floor(diff % 3600000 / 60000);
+    var s = Math.floor(diff % 60000 / 1000);
+    document.getElementById('cd-days').textContent  = d;
+    document.getElementById('cd-hours').textContent = pad(h);
+    document.getElementById('cd-mins').textContent  = pad(m);
+    document.getElementById('cd-secs').textContent  = pad(s);
+    setTimeout(tick, 1000);
+  }
+  tick();
+})();
+</script>
+
+</body>
+</html>

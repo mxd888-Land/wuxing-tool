@@ -10,12 +10,20 @@ from flask import Flask, redirect, render_template, request
 from calculator import calculate_wuxing
 
 app = Flask(__name__)
-DATABASE = 'wuxing.db'
+DATABASE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'wuxing.db')
 GMAIL_USER = 'tangyuxi1002@gmail.com'
 GMAIL_RECIPIENT = 'mxd@mxdyes.com'
 
 GAMMA_LINK = 'https://gamma.app/docs/-df8wl8nfu0ykcin?openExternalBrowser=1'
 LINE_OA_LINK = 'https://line.me/R/ti/p/@919elwkg'
+
+# 免費研討會資訊（要改日期時間，只需改這裡）
+WEBINAR_INFO = {
+    'date': '8 月 26 日',
+    'weekday': '週三',
+    'time': '晚上 7:30 - 9:00',
+    'datetime_iso': '2026-08-26T19:30:00+08:00',  # 倒數計時用
+}
 
 ELEMENT_DATA = {
     1: {
@@ -120,6 +128,16 @@ def init_db():
     ''')
     conn.execute('''
         CREATE TABLE IF NOT EXISTS registrations (
+            id         INTEGER PRIMARY KEY AUTOINCREMENT,
+            name       TEXT NOT NULL,
+            phone      TEXT NOT NULL,
+            email      TEXT NOT NULL,
+            line_id    TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    conn.execute('''
+        CREATE TABLE IF NOT EXISTS webinar_registrations (
             id         INTEGER PRIMARY KEY AUTOINCREMENT,
             name       TEXT NOT NULL,
             phone      TEXT NOT NULL,
@@ -279,7 +297,7 @@ def gift():
     return render_template('gift.html')
 
 
-def append_to_sheet(name, phone, email, line_id):
+def append_to_sheet(name, phone, email, line_id, source='風格覺醒營'):
     """將報名資料寫入 Google 試算表（背景執行）"""
     creds_json = os.environ.get('GOOGLE_CREDENTIALS_JSON', '')
     sheet_id   = os.environ.get('GOOGLE_SHEET_ID', '')
@@ -296,21 +314,21 @@ def append_to_sheet(name, phone, email, line_id):
         ws = gspread.authorize(creds).open_by_key(sheet_id).sheet1
         ws.append_row([
             datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-            name, phone, email, line_id or '未填寫'
+            name, phone, email, line_id or '未填寫', source
         ])
         print(f'[SHEET] 已寫入：{name}')
     except Exception as e:
         print(f'[SHEET] 寫入失敗：{e}')
 
 
-def send_registration_email(name, phone, email, line_id):
+def send_registration_email(name, phone, email, line_id, source='風格覺醒營'):
     gmail_pass = os.environ.get('GMAIL_APP_PASSWORD', '')
     if not gmail_pass:
         return
     msg = MIMEMultipart()
     msg['From'] = GMAIL_USER
     msg['To'] = GMAIL_RECIPIENT
-    msg['Subject'] = f'【美想道】風格覺醒營新報名：{name}'
+    msg['Subject'] = f'【美想道】{source}新報名：{name}'
     body = (
         f"新報名通知\n\n"
         f"姓名：{name}\n"
@@ -366,6 +384,44 @@ def register_submit():
 @app.route('/register/success')
 def register_success():
     return render_template('register_success.html')
+
+
+@app.route('/webinar')
+def webinar():
+    return render_template('webinar.html', info=WEBINAR_INFO)
+
+
+@app.route('/webinar/submit', methods=['POST'])
+def webinar_submit():
+    name    = request.form.get('name', '').strip()
+    phone   = request.form.get('phone', '').strip()
+    email   = request.form.get('email', '').strip()
+    line_id = request.form.get('line_id', '').strip()
+    if not name or not phone or not email:
+        return render_template('webinar.html', info=WEBINAR_INFO, error='請填寫所有必填欄位')
+    conn = get_db()
+    conn.execute(
+        'INSERT INTO webinar_registrations (name, phone, email, line_id) VALUES (?, ?, ?, ?)',
+        (name, phone, email, line_id or None)
+    )
+    conn.commit()
+    conn.close()
+    threading.Thread(
+        target=send_registration_email,
+        args=(name, phone, email, line_id, '免費研討會'),
+        daemon=True
+    ).start()
+    threading.Thread(
+        target=append_to_sheet,
+        args=(name, phone, email, line_id, '免費研討會'),
+        daemon=True
+    ).start()
+    return redirect('/webinar/success')
+
+
+@app.route('/webinar/success')
+def webinar_success():
+    return render_template('webinar_success.html', info=WEBINAR_INFO, line_link=LINE_OA_LINK)
 
 
 @app.route('/broadcast', methods=['GET', 'POST'])

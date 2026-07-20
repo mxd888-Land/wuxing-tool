@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>報名成功｜美想道</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --primary: #7B1A2E;
+  --bg:      #F0E6D8;
+  --gold:    #C9A96E;
+  --text:    #3D2B1F;
+  --light:   #FDFAF6;
+  --muted:   #8B6055;
+}
+body {
+  font-family: 'Noto Serif TC', serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px 60px;
+}
+.header {
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  padding: 44px 0 24px;
+  border-bottom: 1px solid var(--gold);
+  margin-bottom: 40px;
+}
+.logo      { width: 130px; display: block; margin: -18px auto -16px; }
+.brand     { font-size: 22px; color: var(--primary); letter-spacing: 6px; font-weight: 700; }
+.brand-sub { font-size: 11px; color: var(--gold); letter-spacing: 4px; margin-top: 5px; }
+
+.main { width: 100%; max-width: 480px; text-align: center; }
+
+.check {
+  width: 72px;
+  height: 72px;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: var(--gold);
+  margin: 0 auto 24px;
+}
+.title {
+  font-size: 26px;
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: 5px;
+  margin-bottom: 14px;
+}
+.subtitle {
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  line-height: 2.1;
+  margin-bottom: 32px;
+}
+.subtitle strong { color: var(--primary); }
+
+.info-card {
+  background: var(--light);
+  border-radius: 16px;
+  padding: 26px 24px;
+  margin-bottom: 28px;
+  box-shadow: 0 2px 12px rgba(123,26,46,0.05);
+  text-align: left;
+}
+.info-title {
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-align: center;
+  margin-bottom: 18px;
+}
+.step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 10px 0;
+}
+.step-num {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--light);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+.step-text { font-size: 14px; letter-spacing: 1px; line-height: 1.9; color: #4A3328; }
+
+.line-btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background: #06C755;
+  color: #FFFFFF;
+  text-decoration: none;
+  border-radius: 10px;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 15px;
+  letter-spacing: 3px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  transition: opacity 0.2s;
+}
+.line-btn:active { opacity: 0.85; }
+.home-link {
+  display: inline-block;
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  margin-top: 12px;
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 2px;
+}
+.footer {
+  margin-top: 48px;
+  font-size: 11px;
+  color: #B09080;
+  text-align: center;
+  letter-spacing: 3px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <img src="/static/mxd_logo.png" alt="MXD 美想道" class="logo">
+  <div class="brand">美 想 道</div>
+  <div class="brand-sub">MEI XIANG DAO</div>
+</div>
+
+<div class="main">
+
+  <div class="check">✦</div>
+  <h1 class="title">報 名 成 功</h1>
+  <p class="subtitle">
+    已為您保留 <strong>{{ info.date }}（{{ info.weekday }}）{{ info.time }}</strong><br>
+    免費線上研討會的席位
+  </p>
+
+  <div class="info-card">
+    <div class="info-title">接 下 來 兩 個 步 驟</div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">加入美想道官方 LINE，研討會提醒與直播連結將優先透過 LINE 通知您</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">研討會前請留意 LINE 與 Email，準時上線即可領取「五行穿搭速查表」</div>
+    </div>
+  </div>
+
+  <a href="{{ line_link }}" class="line-btn">加 入 官 方 LINE 接 收 通 知</a>
+
+  <a href="/webinar" class="home-link">回研討會頁面</a>
+
+</div>
+
+<div class="footer">向 內 觀 己 ・ 向 外 綻 放</div>
+
+</body>
+</html>
