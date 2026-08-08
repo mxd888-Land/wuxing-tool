@@ -146,6 +146,20 @@ def init_db():
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     ''')
+    conn.execute('''
+        CREATE TABLE IF NOT EXISTS shopline_payments (
+            id                 INTEGER PRIMARY KEY AUTOINCREMENT,
+            event_id           TEXT UNIQUE,
+            event_type         TEXT,
+            email              TEXT,
+            phone              TEXT,
+            name               TEXT,
+            amount             TEXT,
+            harvest_contact_id TEXT,
+            raw_payload        TEXT,
+            created_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
     conn.commit()
     conn.close()
 
@@ -346,6 +360,189 @@ def send_registration_email(name, phone, email, line_id, source='風格覺醒營
         print(f'[EMAIL] 報名通知已寄出：{name}')
     except Exception as e:
         print(f'[EMAIL] 寄信失敗：{e}')
+
+
+def verify_shopline_signature(raw_body, timestamp, sign, sign_key, max_age_seconds=300):
+    """驗證 Shopline Payments Webhook 簽章
+    規則（見 SHOPLINE 串接文件「簽章演算法」）：
+    sign = hmacSha256(f'{timestamp}.{body}', signKey)
+    另外拒絕過舊的 timestamp，防止重播攻擊。
+    """
+    import hmac
+    import hashlib
+    import time
+    if not timestamp or not sign:
+        return False
+    try:
+        ts_ms = int(timestamp)
+    except ValueError:
+        return False
+    now_ms = int(time.time() * 1000)
+    if abs(now_ms - ts_ms) > max_age_seconds * 1000:
+        print(f'[SHOPLINE] timestamp 過期或異常：{timestamp}')
+        return False
+    body_str = raw_body.decode('utf-8') if isinstance(raw_body, bytes) else raw_body
+    payload = f'{timestamp}.{body_str}'
+    expected = hmac.new(sign_key.encode('utf-8'), payload.encode('utf-8'), hashlib.sha256).hexdigest()
+    return hmac.compare_digest(expected, sign)
+
+
+def harvest_ai_upsert_contact(email, phone, name):
+    """在 Harvest AI (GoHighLevel) 建立/更新聯絡人，回傳 contactId"""
+    import requests as req
+    token = os.environ.get('HARVEST_AI_PIT_TOKEN', '')
+    location_id = os.environ.get('HARVEST_AI_LOCATION_ID', '')
+    if not token or not location_id:
+        print('[HARVEST] 未設定 HARVEST_AI_PIT_TOKEN / HARVEST_AI_LOCATION_ID，略過同步')
+        return None
+    payload = {'locationId': location_id}
+    if email:
+        payload['email'] = email
+    if phone:
+        payload['phone'] = phone
+    if name:
+        payload['name'] = name
+    try:
+        r = req.post(
+            'https://services.leadconnectorhq.com/contacts/upsert',
+            headers={
+                'Authorization': f'Bearer {token}',
+                'Version': '2021-07-28',
+                'Content-Type': 'application/json',
+            },
+            json=payload,
+            timeout=15,
+        )
+        r.raise_for_status()
+        contact_id = (r.json().get('contact') or {}).get('id')
+        print(f'[HARVEST] 聯絡人已同步：{contact_id}')
+        return contact_id
+    except Exception as e:
+        print(f'[HARVEST] upsert 聯絡人失敗：{e}')
+        return None
+
+
+def harvest_ai_add_tag(contact_id, tag):
+    """幫 Harvest AI 聯絡人打標籤，觸發後續 Automation"""
+    import requests as req
+    token = os.environ.get('HARVEST_AI_PIT_TOKEN', '')
+    if not contact_id or not token:
+        return False
+    try:
+        r = req.post(
+            f'https://services.leadconnectorhq.com/contacts/{contact_id}/tags',
+            headers={
+                'Authorization': f'Bearer {token}',
+                'Version': '2021-07-28',
+                'Content-Type': 'application/json',
+            },
+            json={'tags': [tag]},
+            timeout=15,
+        )
+        r.raise_for_status()
+        print(f'[HARVEST] 已打標籤：{tag}')
+        return True
+    except Exception as e:
+        print(f'[HARVEST] 打標籤失敗：{e}')
+        return False
+
+
+def send_payment_notification_email(name, email, phone, amount, event_type):
+    gmail_pass = os.environ.get('GMAIL_APP_PASSWORD', '')
+    if not gmail_pass:
+        return
+    msg = MIMEMultipart()
+    msg['From'] = GMAIL_USER
+    msg['To'] = GMAIL_RECIPIENT
+    msg['Subject'] = f'【美想道】收到付款通知：{name or email or phone or "未知學員"}'
+    body = (
+        f"Shopline 付款通知（已同步到 Harvest AI）\n\n"
+        f"事件類型：{event_type}\n"
+        f"姓名：{name or '未提供'}\n"
+        f"Email：{email or '未提供'}\n"
+        f"手機：{phone or '未提供'}\n"
+        f"金額：{amount or '未提供'}\n\n"
+        f"時間：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
+    )
+    msg.attach(MIMEText(body, 'plain', 'utf-8'))
+    try:
+        with smtplib.SMTP('smtp.gmail.com', 587, timeout=15) as server:
+            server.starttls()
+            server.login(GMAIL_USER, gmail_pass)
+            server.send_message(msg)
+        print('[EMAIL] 付款通知已寄出')
+    except Exception as e:
+        print(f'[EMAIL] 付款通知寄信失敗：{e}')
+
+
+@app.route('/webhooks/shopline-payment', methods=['POST'])
+def shopline_payment_webhook():
+    """接收 Shopline Payments 付款成功通知，同步聯絡人與標籤到 Harvest AI。
+    Webhook 名稱：五行決策系統-HarvestAI橋接（Shopline 後台 設定 > 開發者管理 > Webhook 管理）
+    訂閱事件：session.succeeded, trade.succeeded
+    """
+    sign_key = os.environ.get('SHOPLINE_WEBHOOK_SIGN_KEY', '')
+    timestamp = request.headers.get('timestamp', '')
+    sign = request.headers.get('sign', '')
+    raw_body = request.get_data()
+
+    if not sign_key or not verify_shopline_signature(raw_body, timestamp, sign, sign_key):
+        print('[SHOPLINE] 簽章驗證失敗，拒絕請求')
+        return 'invalid signature', 401
+
+    try:
+        payload = json.loads(raw_body)
+    except Exception:
+        return 'invalid body', 400
+
+    event_id = payload.get('id', '')
+    event_type = payload.get('type', '')
+    data = payload.get('data', {}) or {}
+
+    if event_type not in ('session.succeeded', 'trade.succeeded'):
+        return 'ignored', 200
+
+    conn = get_db()
+    existing = conn.execute(
+        'SELECT id FROM shopline_payments WHERE event_id = ?', (event_id,)
+    ).fetchone()
+    if existing:
+        conn.close()
+        print(f'[SHOPLINE] 事件 {event_id} 已處理過，略過（webhook 重送）')
+        return 'duplicate', 200
+
+    order = data.get('order', {}) or {}
+    customer = order.get('customer', {}) or data.get('customer', {}) or {}
+    email = customer.get('email') or data.get('email') or ''
+    phone = customer.get('phone') or data.get('phone') or ''
+    name = customer.get('name') or data.get('name') or ''
+    amount_obj = order.get('amount', {}) or data.get('amount', {}) or {}
+    amount = f"{amount_obj.get('value', '')} {amount_obj.get('currency', '')}".strip()
+
+    contact_id = None
+    if email or phone:
+        contact_id = harvest_ai_upsert_contact(email, phone, name)
+        if contact_id:
+            harvest_ai_add_tag(contact_id, '已付款-五行決策系統-首期')
+    else:
+        print(f'[SHOPLINE] 事件 {event_id} 沒有 email/phone，無法同步聯絡人，請人工檢查 raw_payload')
+
+    conn.execute(
+        'INSERT INTO shopline_payments '
+        '(event_id, event_type, email, phone, name, amount, harvest_contact_id, raw_payload) '
+        'VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+        (event_id, event_type, email, phone, name, amount, contact_id, raw_body.decode('utf-8'))
+    )
+    conn.commit()
+    conn.close()
+
+    threading.Thread(
+        target=send_payment_notification_email,
+        args=(name, email, phone, amount, event_type),
+        daemon=True
+    ).start()
+
+    return 'ok', 200
 
 
 @app.route('/register')
